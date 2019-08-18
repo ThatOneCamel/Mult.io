@@ -16,7 +16,7 @@ public class MainMenuActivity extends AppCompatActivity {
         findViewById(R.id.gameStartBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gameplay = new Intent(getApplicationContext(), MainActivity.class);
+                Intent gameplay = new Intent(getApplicationContext(), CampaignActivity.class);
                 startActivity(gameplay);
                 finish();
             }
