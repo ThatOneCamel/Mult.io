@@ -1,5 +1,6 @@
 package efx.com.multio;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -84,5 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void IBaddNum(View v) {
         inputFragment.IBaddNum(v,editor);
+    }
+
+    public void goToUserProfile(View v){
+        Intent mIntent = new Intent(getApplicationContext(),User_Profile.class);
+        startActivity(mIntent);
+        //finish();
     }
 }

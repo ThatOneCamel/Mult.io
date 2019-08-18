@@ -26,7 +26,7 @@ public class MainMenuActivity extends AppCompatActivity {
         findViewById(R.id.viewProfileBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent profile = new Intent(getApplicationContext(), User_Profile.class);
+                Intent profile = new Intent(getApplicationContext(), User_Profile.class);
             }
         });
     }
