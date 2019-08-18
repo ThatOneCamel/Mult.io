@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:onClick="goToUserProfile"
         android:text="Cameron"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
