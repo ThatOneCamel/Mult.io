@@ -18,6 +18,7 @@ import java.util.Random;
 public class EquationFragment extends Fragment {
 
     public TextView viewA, viewB;
+    int n = 0;
 
 
     public EquationFragment() {
@@ -34,23 +35,40 @@ public class EquationFragment extends Fragment {
         viewA = fragView.findViewById(R.id.numberA);
         viewB = fragView.findViewById(R.id.numberB);
 
-        ArrayList<Integer> numberList = generateProblems(50);
-        viewA.setText(Integer.toString(numberList.get(0)));
-        viewB.setText(Integer.toString(numberList.get(1))); //Design will support up to 4 digits
         return fragView;
+
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
 
     }
 
     //Move below to Main?
     public ArrayList<Integer> generateProblems(int max){
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<Integer> list = new ArrayList<>();
         Random rand = new Random();
 
         for(int i = 0; i < max; i++){
-            list.add(rand.nextInt(100) + 1);
+            list.add(rand.nextInt(10) + 1);
         }
 
         return list;
+    }
+
+    public int nextProblem(ArrayList<Integer> numberList){
+        int a = numberList.get(n);
+        int b = numberList.get(n+1);
+        n+=2;
+
+        viewA.setText(Integer.toString(a));
+        viewB.setText(Integer.toString(b));
+
+        return a*b;
+    }
+
+    public int getIndex(){
+        return n;
     }
 
 }
