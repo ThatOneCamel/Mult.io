@@ -16,9 +16,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     EquationFragment mathFragment;
+    InputButtons inputFragment;
     ArrayList<Integer> problems;
-    EditText editor;
-    Button [] textButtons;
+    TextView editor;
+
     int answer;
 
     @Override
@@ -27,9 +28,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mathFragment = (EquationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
+        inputFragment = (InputButtons) getSupportFragmentManager().findFragmentById(R.id.InputButtons);
         problems = mathFragment.generateProblems(10);
-        editor = findViewById(R.id.editText);
+        editor = findViewById(R.id.numInput);
 
+        /*
         mathFragment.placeholder.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -40,10 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        for (int i = 0; i < 10; i++)
-        {
-            textButtons[i]= findViewById(R.id.btn + i.toString());
-        }
+        */
+
         answer = mathFragment.nextProblem(problems);
         Log.d("TAGGED", problems.toString());
     }
@@ -59,5 +60,16 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Ans is" + answer, Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void erase(View v)
+    {
+        String str = editor.getText().toString();
+        if(str.length() > 0)
+            editor.setText(str.substring(0,str.length()-1));
+    }
+
+    public void IBaddNum(View v) {
+        inputFragment.IBaddNum(v,editor);
     }
 }

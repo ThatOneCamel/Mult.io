@@ -19,7 +19,7 @@ import java.util.Random;
 public class EquationFragment extends Fragment {
 
     public TextView viewA, viewB;
-    public EditText placeholder;
+    public TextView placeholder;
     int n = 0;
 
 
@@ -36,7 +36,7 @@ public class EquationFragment extends Fragment {
 
         viewA = fragView.findViewById(R.id.numberA);
         viewB = fragView.findViewById(R.id.numberB);
-        placeholder = fragView.findViewById(R.id.editText);
+        placeholder = fragView.findViewById(R.id.numInput);
 
         return fragView;
 
