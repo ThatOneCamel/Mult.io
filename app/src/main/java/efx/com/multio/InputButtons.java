@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,8 +34,8 @@ public class InputButtons extends Fragment{
 
     public String getNum(View v)
     {
-        Button b = (Button) v;
-        return b.getText().toString();
+        ImageButton b = (ImageButton) v;
+        return b.getContentDescription().toString();
     }
 
     public void IBaddNum(View v, TextView e) {
