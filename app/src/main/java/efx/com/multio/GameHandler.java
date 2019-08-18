@@ -1,5 +1,8 @@
 package efx.com.multio;
 
+import android.os.CountDownTimer;
+import android.util.Log;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,24 +27,55 @@ public class GameHandler {
     public GameHandler() {
         length = 10;
         problems = new ArrayList<Problem>(length);
+        timer = new CountDownTimer(timeLeft,100) {
+            @Override
+            public void onTick(long l) {
+                timeLeft = l;
+            }
 
+            @Override
+            public void onFinish() {
+
+            }
+        };
     }
 
     public GameHandler(int cap) {
         length = cap;
         problems = new ArrayList<Problem>(length);
+        timer = new CountDownTimer(timeLeft,100) {
+            @Override
+            public void onTick(long l) {
+                timeLeft = l;
+            }
 
+            @Override
+            public void onFinish() {
+
+            }
+        };
     }
 
     private int index = 0;
     private int length;
     private ArrayList<Problem>   problems;
     private int score = 0;
+    private CountDownTimer timer;
+    private long timeLeft = 3000;
 
     public void generateProblems(){
         for(int i = 0; i < length; i++){
             problems.add(new Problem());
         }
+    }
+
+    public void timerStart() {
+        timeLeft = 3000;
+        timer.start();
+    }
+    public double timerStop() {
+        timer.cancel();
+        return timeLeft / 100;
     }
 
     public void nextProblem(){
