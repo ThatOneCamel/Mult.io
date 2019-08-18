@@ -20,7 +20,7 @@ public class EquationFragment extends Fragment {
 
     public TextView viewA, viewB;
     public TextView placeholder;
-    int n = 0;
+
 
 
     public EquationFragment() {
@@ -47,32 +47,13 @@ public class EquationFragment extends Fragment {
 
     }
 
-    //Move below to Main?
-    public ArrayList<Integer> generateProblems(int max){
-        ArrayList<Integer> list = new ArrayList<>();
-        Random rand = new Random();
-
-        for(int i = 0; i < max; i++){
-            list.add(rand.nextInt(10) + 1);
-        }
-
-        return list;
-    }
-
-    public int nextProblem(ArrayList<Integer> numberList){
-        int a = numberList.get(n);
-        int b = numberList.get(n+1);
-        n+=2;
-
+    public void load(int a, int b)
+    {
         viewA.setText(Integer.toString(a));
         viewB.setText(Integer.toString(b));
-        placeholder.setText("");
-
-        return a*b;
     }
 
-    public int getIndex(){
-        return n;
-    }
+
+
 
 }
