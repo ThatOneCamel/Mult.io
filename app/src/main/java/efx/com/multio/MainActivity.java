@@ -17,8 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
     EquationFragment mathFragment;
     InputButtons inputFragment;
-    ArrayList<Integer> problems;
+    ArrayList<GameHandler.Problem> problems;
     TextView editor;
+    GameHandler Game;
 
     int answer;
 
@@ -29,8 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         mathFragment = (EquationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
         inputFragment = (InputButtons) getSupportFragmentManager().findFragmentById(R.id.InputButtons);
-        problems = mathFragment.generateProblems(10);
         editor = findViewById(R.id.numInput);
+
+        Game = new GameHandler();
+        Game.generateProblems();
+        mathFragment.load(Game.getProblem().numberA,Game.getProblem().numberB);
+
 
         /*
         mathFragment.placeholder.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -45,18 +50,26 @@ public class MainActivity extends AppCompatActivity {
         });
         */
 
-        answer = mathFragment.nextProblem(problems);
-        Log.d("TAGGED", problems.toString());
+
+//        Log.d("TAGGED", problems.toString());
     }
 
     public void checkAnswer(View n){
-        if(editor.getText().toString().equals(Integer.toString(answer))){
+        int input = Integer.parseInt(editor.getText().toString());
+
+        if(Game.checkAnswer(input)) {
             Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
-            if(mathFragment.getIndex() == problems.size())
+            editor.setText("");
+            Game.addScore(0);
+            if(Game.finished()) {
                 Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
-            else
-                answer = mathFragment.nextProblem(problems);
-        } else {
+            }
+            else{
+                Game.nextProblem();
+                mathFragment.load(Game.getProblem().numberA, Game.getProblem().numberB);
+            }
+        }
+        else {
             Toast.makeText(this, "Ans is" + answer, Toast.LENGTH_SHORT).show();
         }
 
