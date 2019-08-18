@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     EquationFragment mathFragment;
     ArrayList<Integer> problems;
     EditText editor;
+    Button [] textButtons;
     int answer;
 
     @Override
@@ -38,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        for (int i = 0; i < 10; i++)
+        {
+            textButtons[i]= findViewById(R.id.btn + i.toString());
+        }
         answer = mathFragment.nextProblem(problems);
         Log.d("TAGGED", problems.toString());
     }
