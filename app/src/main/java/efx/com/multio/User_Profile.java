@@ -25,7 +25,7 @@ public class User_Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 m_username.setText("haydenberryc");
-                m_title.setText("Mathamagician");
+                m_title.setText("calculator");
             }
         });
 
