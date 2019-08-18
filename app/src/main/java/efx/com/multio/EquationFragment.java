@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Random;
 public class EquationFragment extends Fragment {
 
     public TextView viewA, viewB;
+    public EditText placeholder;
     int n = 0;
 
 
@@ -34,6 +36,7 @@ public class EquationFragment extends Fragment {
 
         viewA = fragView.findViewById(R.id.numberA);
         viewB = fragView.findViewById(R.id.numberB);
+        placeholder = fragView.findViewById(R.id.editText);
 
         return fragView;
 
@@ -63,6 +66,7 @@ public class EquationFragment extends Fragment {
 
         viewA.setText(Integer.toString(a));
         viewB.setText(Integer.toString(b));
+        placeholder.setText("");
 
         return a*b;
     }
