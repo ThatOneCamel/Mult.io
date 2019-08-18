@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".MainActivity">
 
     <fragment
@@ -67,9 +68,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="140dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#A950F39F"
+        android:backgroundTint="#4AAEA9"
         android:onClick="checkAnswer"
         android:text="ENTER"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,10 +97,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="135dp"
+        android:background="@null"
         android:onClick="erase"
         app:layout_constraintStart_toEndOf="@+id/fragment_main"
         app:layout_constraintTop_toTopOf="@+id/fragment_main"
-        app:srcCompat="@drawable/baseline_backspace_black_36" />
+        app:srcCompat="@drawable/baseline_backspace_24" />
 
     <TextView
         android:id="@+id/ScoreView"
