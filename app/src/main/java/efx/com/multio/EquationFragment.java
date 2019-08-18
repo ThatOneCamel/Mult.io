@@ -49,8 +49,14 @@ public class EquationFragment extends Fragment {
 
     public void load(int a, int b)
     {
-        viewA.setText(Integer.toString(a));
-        viewB.setText(Integer.toString(b));
+        if(b > a) {
+            viewA.setText(Integer.toString(b));
+            viewB.setText(Integer.toString(a));
+        }
+        else {
+            viewA.setText(Integer.toString(a));
+            viewB.setText(Integer.toString(b));
+        }
     }
 
 
