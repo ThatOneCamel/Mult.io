@@ -6,12 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".User_Profile">
 
+    <TextView
+        android:id="@+id/txtBestScore"
+        android:layout_width="121dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="70dp"
+        android:text="Best Score: "
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/txtBestTime"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtGamesWon" />
+
+    <TextView
+        android:id="@+id/txtGamesWon"
+        android:layout_width="121dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="8dp"
+        android:text="Games Won: "
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
     <ImageView
         android:id="@+id/imgBadge3"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="70dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imgBadge4"
@@ -26,7 +54,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="70dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imgBadge2"
@@ -42,7 +70,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="70dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imgBadge3"
@@ -57,7 +85,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="70dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -124,5 +152,19 @@
         app:layout_constraintHorizontal_bias="0.973"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtBestTime"
+        android:layout_width="121dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="8dp"
+        android:text="Best Time: "
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txtBestScore"
+        app:layout_constraintTop_toBottomOf="@+id/txtGamesWon" />
 
 </android.support.constraint.ConstraintLayout>
