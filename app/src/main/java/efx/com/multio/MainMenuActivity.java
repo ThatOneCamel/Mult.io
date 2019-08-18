@@ -27,6 +27,7 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent profile = new Intent(getApplicationContext(), User_Profile.class);
+                startActivity(profile);
             }
         });
     }

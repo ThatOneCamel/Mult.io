@@ -39,6 +39,7 @@ public class InputButtons extends Fragment{
     }
 
     public void IBaddNum(View v, TextView e) {
-        e.setText(e.getText() + getNum(v));
+        if(e.getText().toString().length() < 4)
+            e.setText(e.getText() + getNum(v));
     }
 }

@@ -56,22 +56,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkAnswer(View n){
-        int input = Integer.parseInt(editor.getText().toString());
-
-        if(Game.checkAnswer(input)) {
-            Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
-            editor.setText("");
-            Game.addScore(0);
-            if(Game.finished()) {
-                Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Game.nextProblem();
-                mathFragment.load(Game.getProblem().numberA, Game.getProblem().numberB);
-            }
-        }
+        if(editor.getText().toString().equals(""))
+            Toast.makeText(this,"Text is empty",Toast.LENGTH_SHORT).show();
         else {
-            Toast.makeText(this, "Ans is" + answer, Toast.LENGTH_SHORT).show();
+            int input = Integer.parseInt(editor.getText().toString());
+
+            if (Game.checkAnswer(input)) {
+                Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
+                editor.setText("");
+                Game.addScore(0);
+                if (Game.finished()) {
+                    Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Game.nextProblem();
+                    mathFragment.load(Game.getProblem().numberA, Game.getProblem().numberB);
+                }
+            } else {
+                Toast.makeText(this, "Ans is" + answer, Toast.LENGTH_SHORT).show();
+            }
         }
 
     }
