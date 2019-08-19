@@ -72,6 +72,7 @@
         android:onClick="checkAnswer"
         android:text="ENTER"
         android:textColor="@android:color/white"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

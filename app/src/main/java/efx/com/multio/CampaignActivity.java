@@ -46,9 +46,30 @@ public class CampaignActivity extends AppCompatActivity {
         inputFragment.getView().setVisibility(View.INVISIBLE);
         backButton.setVisibility(View.INVISIBLE);
 
+        inputFragment.setCustomCallback(new InputButtons.OnClickCallback() {
+
+            public void onClick(View v, int num) {
+                editor.setText(editor.getText().toString()+num);
+            }
+
+
+            public void onClear(View v) {
+                editor.setText("");
+            }
+
+            public void onEnter(View v) {
+                checkAnswer(v);
+            }
+
+
+        });
+
+
         Game = new GameHandler();
         Game.generateProblems();
         mathFragment.load(Game.getProblem().numberA,Game.getProblem().numberB);
+
+
 /*
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -118,17 +139,6 @@ public class CampaignActivity extends AppCompatActivity {
             }
         }
 
-    }
-
-    public void erase(View v)
-    {
-        String str = editor.getText().toString();
-        if(str.length() > 0)
-            editor.setText(str.substring(0,str.length()-1));
-    }
-
-    public void IBaddNum(View v) {
-        inputFragment.IBaddNum(v,editor);
     }
 
     public void goToUserProfile(View v){
