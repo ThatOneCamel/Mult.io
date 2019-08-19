@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".InGameUser">
+    
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cameron"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/currImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        app:layout_constraintStart_toEndOf="@+id/userCurr"
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:srcCompat="@drawable/baseline_polymer_black_24" />
+
+    <TextView
+        android:id="@+id/userCurr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/currImg"
+        app:layout_constraintEnd_toStartOf="@+id/currImg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/userName"
+        app:layout_constraintTop_toTopOf="@+id/currImg" />
+
+</android.support.constraint.ConstraintLayout>
