@@ -106,7 +106,6 @@ public class CampaignActivity extends AppCompatActivity {
                 editor.setText("");
                 Game.addScore(Game.timerStop());
                 score.setText(Integer.toString(Game.getScore()));
-                Toast.makeText(this, "time of "+ Game.timerStop(), Toast.LENGTH_SHORT).show();
                 if (Game.finished()) {
                     Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
                 } else {
