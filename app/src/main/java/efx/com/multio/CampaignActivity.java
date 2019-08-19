@@ -17,12 +17,11 @@ public class CampaignActivity extends AppCompatActivity {
     EquationFragment mathFragment;
     InputButtons inputFragment;
     CountDownScreen countDownFragment;
-    ArrayList<GameHandler.Problem> problems;
     TextView editor;
     GameHandler Game;
-    ImageButton backButton;
     CountDownTimer timer;
     TextView score;
+
 
     private long timeLeft = 3500;
 
@@ -39,24 +38,37 @@ public class CampaignActivity extends AppCompatActivity {
         inputFragment = (InputButtons) getSupportFragmentManager().findFragmentById(R.id.fragment_buttons);
         countDownFragment = (CountDownScreen) getSupportFragmentManager().findFragmentById(R.id.fragment_countdown);
         editor = findViewById(R.id.numInput);
-        backButton = findViewById(R.id.backButton);
         score = findViewById(R.id.ScoreView);
+
 
         mathFragment.getView().setVisibility(View.INVISIBLE);
         inputFragment.getView().setVisibility(View.INVISIBLE);
-        backButton.setVisibility(View.INVISIBLE);
+
+        inputFragment.setCustomCallback(new InputButtons.OnClickCallback() {
+
+            public void onClick(View v, int num) {
+                if(editor.getText().length() < 4){
+                    editor.setText(editor.getText().toString()+num);
+                }
+            }
+
+
+            public void onClear(View v) {
+                editor.setText("");
+            }
+
+            public void onEnter(View v) {
+                checkAnswer(v);
+            }
+
+
+        });
+
 
         Game = new GameHandler();
-        Game.generateProblems();
-        mathFragment.load(Game.getProblem().numberA,Game.getProblem().numberB);
-/*
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        Game.generateProblems(Diff.MEDIUM,10);
 
-            }
-        },1);
-*/
+        mathFragment.load(Game.getProblem().numberA,Game.getProblem().numberB);
 
 
         timer = new CountDownTimer(timeLeft,100) {
@@ -90,7 +102,6 @@ public class CampaignActivity extends AppCompatActivity {
     {
         mathFragment.getView().setVisibility(View.VISIBLE);
         inputFragment.getView().setVisibility(View.VISIBLE);
-        backButton.setVisibility(View.VISIBLE);
         countDownFragment.getView().setVisibility(View.INVISIBLE);
         Game.timerStart();
     }
@@ -110,6 +121,7 @@ public class CampaignActivity extends AppCompatActivity {
                     Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
                 } else {
                     Game.nextProblem();
+
                     mathFragment.load(Game.getProblem().numberA, Game.getProblem().numberB);
                     Game.timerStart();
                 }
@@ -118,17 +130,6 @@ public class CampaignActivity extends AppCompatActivity {
             }
         }
 
-    }
-
-    public void erase(View v)
-    {
-        String str = editor.getText().toString();
-        if(str.length() > 0)
-            editor.setText(str.substring(0,str.length()-1));
-    }
-
-    public void IBaddNum(View v) {
-        inputFragment.IBaddNum(v,editor);
     }
 
     public void goToUserProfile(View v){
