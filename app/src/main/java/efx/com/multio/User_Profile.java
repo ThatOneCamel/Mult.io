@@ -11,7 +11,6 @@ public class User_Profile extends AppCompatActivity {
 
     TextView m_username;
     TextView m_title;
-    ImageView m_Edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,15 +19,7 @@ public class User_Profile extends AppCompatActivity {
 
         m_username = findViewById(R.id.txtUsername);
         m_title = findViewById(R.id.txtTitle);
-        m_Edit = findViewById(R.id.imgEdit);
 
-        m_Edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                m_username.setText("haydenberryc");
-                m_title.setText("calculator");
-            }
-        });
 
     }
 }

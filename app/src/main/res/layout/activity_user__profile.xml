@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#444261"
     tools:context=".User_Profile">
 
     <TextView
-        android:id="@+id/txtWins7"
+        android:id="@+id/txtWins"
         android:layout_width="112dp"
         android:layout_height="24dp"
         android:text="25"
@@ -17,7 +18,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtGamesWon" />
 
     <TextView
-        android:id="@+id/txtWins9"
+        android:id="@+id/txtTime"
         android:layout_width="112dp"
         android:layout_height="22dp"
         android:text="32"
@@ -27,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtBestTime" />
 
     <TextView
-        android:id="@+id/txtWins"
+        android:id="@+id/txtScore"
         android:layout_width="112dp"
         android:layout_height="22dp"
         android:text="720"
@@ -139,8 +140,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_def_app_icon"
-        tools:srcCompat="@tools:sample/avatars"
+        app:srcCompat="@drawable/baseline_account_circle_white_48"
+        tools:srcCompat="@drawable/baseline_account_circle_white_48"
         tools:visibility="visible" />
 
     <TextView
@@ -195,7 +196,8 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_compass" />
+        app:srcCompat="@drawable/baseline_polymer_white_24"
+        tools:srcCompat="@drawable/baseline_polymer_white_24" />
 
     <TextView
         android:id="@+id/txtTokens"
@@ -207,15 +209,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/imgToken"
         app:layout_constraintStart_toEndOf="@+id/imgToken"
         app:layout_constraintTop_toTopOf="@+id/imgToken" />
-
-    <ImageView
-        android:id="@+id/imgEdit"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_edit_white_24" />
 
 </android.support.constraint.ConstraintLayout>
