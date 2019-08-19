@@ -30,6 +30,15 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(profile);
             }
         });
+
+        findViewById(R.id.btnEG).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent endGame = new Intent(getApplicationContext(), EndgameScreenActivity.class);
+                endGame.putExtra("Score","50");
+                startActivity(endGame);
+            }
+        });
     }
 
 }

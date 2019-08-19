@@ -191,7 +191,7 @@ public class GameHandler {
             return 1.1;
         else return 1.0;
     }
-    public int getScore() {
-        return score;
+    public String getScore() {
+        return Integer.toString(score);
     }
 }

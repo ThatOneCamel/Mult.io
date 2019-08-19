@@ -116,9 +116,10 @@ public class CampaignActivity extends AppCompatActivity {
                 Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
                 editor.setText("");
                 Game.addScore(Game.timerStop());
-                score.setText(Integer.toString(Game.getScore()));
+                score.setText(Game.getScore());
                 if (Game.finished()) {
                     Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
+                    endGame();
                 } else {
                     Game.nextProblem();
 
@@ -136,5 +137,13 @@ public class CampaignActivity extends AppCompatActivity {
         Intent mIntent = new Intent(getApplicationContext(),User_Profile.class);
         startActivity(mIntent);
         //finish();
+    }
+
+    public void endGame()
+    {
+        Intent endIntent = new Intent(this,EndgameScreenActivity.class);
+        endIntent.putExtra("Score",Game.getScore());
+        startActivity(endIntent);
+        finish();
     }
 }
