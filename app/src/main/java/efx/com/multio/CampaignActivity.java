@@ -17,12 +17,11 @@ public class CampaignActivity extends AppCompatActivity {
     EquationFragment mathFragment;
     InputButtons inputFragment;
     CountDownScreen countDownFragment;
-    ArrayList<GameHandler.Problem> problems;
     TextView editor;
     GameHandler Game;
-    ImageButton backButton;
     CountDownTimer timer;
     TextView score;
+
 
     private long timeLeft = 3500;
 
@@ -39,12 +38,11 @@ public class CampaignActivity extends AppCompatActivity {
         inputFragment = (InputButtons) getSupportFragmentManager().findFragmentById(R.id.fragment_buttons);
         countDownFragment = (CountDownScreen) getSupportFragmentManager().findFragmentById(R.id.fragment_countdown);
         editor = findViewById(R.id.numInput);
-        backButton = findViewById(R.id.backButton);
         score = findViewById(R.id.ScoreView);
+
 
         mathFragment.getView().setVisibility(View.INVISIBLE);
         inputFragment.getView().setVisibility(View.INVISIBLE);
-        backButton.setVisibility(View.INVISIBLE);
 
         inputFragment.setCustomCallback(new InputButtons.OnClickCallback() {
 
@@ -66,18 +64,9 @@ public class CampaignActivity extends AppCompatActivity {
 
 
         Game = new GameHandler();
-        Game.generateProblems();
+        Game.generateProblems(Diff.MEDIUM,10);
+
         mathFragment.load(Game.getProblem().numberA,Game.getProblem().numberB);
-
-
-/*
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        },1);
-*/
 
 
         timer = new CountDownTimer(timeLeft,100) {
@@ -111,7 +100,6 @@ public class CampaignActivity extends AppCompatActivity {
     {
         mathFragment.getView().setVisibility(View.VISIBLE);
         inputFragment.getView().setVisibility(View.VISIBLE);
-        backButton.setVisibility(View.VISIBLE);
         countDownFragment.getView().setVisibility(View.INVISIBLE);
         Game.timerStart();
     }
@@ -131,6 +119,7 @@ public class CampaignActivity extends AppCompatActivity {
                     Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
                 } else {
                     Game.nextProblem();
+
                     mathFragment.load(Game.getProblem().numberA, Game.getProblem().numberB);
                     Game.timerStart();
                 }

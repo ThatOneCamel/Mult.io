@@ -91,17 +91,6 @@
         app:layout_constraintTop_toBottomOf="@+id/fragment_main"
         tools:layout="@layout/fragment_inputbuttons" />
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="135dp"
-        android:background="@null"
-        android:onClick="erase"
-        app:layout_constraintStart_toEndOf="@+id/fragment_main"
-        app:layout_constraintTop_toTopOf="@+id/fragment_main"
-        app:srcCompat="@drawable/baseline_backspace_24" />
-
     <TextView
         android:id="@+id/ScoreView"
         android:layout_width="wrap_content"
