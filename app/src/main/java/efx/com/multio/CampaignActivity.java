@@ -47,7 +47,9 @@ public class CampaignActivity extends AppCompatActivity {
         inputFragment.setCustomCallback(new InputButtons.OnClickCallback() {
 
             public void onClick(View v, int num) {
-                editor.setText(editor.getText().toString()+num);
+                if(editor.getText().length() < 4){
+                    editor.setText(editor.getText().toString()+num);
+                }
             }
 
 

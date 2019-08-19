@@ -18,7 +18,7 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent gameplay = new Intent(getApplicationContext(), CampaignActivity.class);
                 startActivity(gameplay);
-                finish();
+                //finish();
             }
         });
 

@@ -141,23 +141,27 @@
         app:layout_constraintStart_toEndOf="@+id/btnClear"
         app:layout_constraintTop_toBottomOf="@+id/btn8" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnClear"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#3F74B5"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/box_clear"
         android:text="Clear"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn7" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnEnter"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#3F74B5"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/box_enter2"
         android:text="Enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn0"

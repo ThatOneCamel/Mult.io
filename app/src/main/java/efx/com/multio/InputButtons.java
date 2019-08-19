@@ -21,7 +21,7 @@ import android.widget.Toast;
 public class InputButtons extends Fragment{
 
     ImageButton [] Buttons;
-    Button clearBtn, enterBtn;
+    ImageButton clearBtn, enterBtn;
 
     private OnClickCallback callback;
 
