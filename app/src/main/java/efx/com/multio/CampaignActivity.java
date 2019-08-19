@@ -22,6 +22,8 @@ public class CampaignActivity extends AppCompatActivity {
     GameHandler Game;
     ImageButton backButton;
     CountDownTimer timer;
+    TextView score;
+
     private long timeLeft = 3500;
 
     int answer;
@@ -38,6 +40,7 @@ public class CampaignActivity extends AppCompatActivity {
         countDownFragment = (CountDownScreen) getSupportFragmentManager().findFragmentById(R.id.fragment_countdown);
         editor = findViewById(R.id.numInput);
         backButton = findViewById(R.id.backButton);
+        score = findViewById(R.id.ScoreView);
 
         mathFragment.getView().setVisibility(View.INVISIBLE);
         inputFragment.getView().setVisibility(View.INVISIBLE);
@@ -89,6 +92,7 @@ public class CampaignActivity extends AppCompatActivity {
         inputFragment.getView().setVisibility(View.VISIBLE);
         backButton.setVisibility(View.VISIBLE);
         countDownFragment.getView().setVisibility(View.INVISIBLE);
+        Game.timerStart();
     }
 
     public void checkAnswer(View n){
@@ -100,12 +104,15 @@ public class CampaignActivity extends AppCompatActivity {
             if (Game.checkAnswer(input)) {
                 Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
                 editor.setText("");
-                Game.addScore(0);
+                Game.addScore(Game.timerStop());
+                score.setText(Integer.toString(Game.getScore()));
+                Toast.makeText(this, "time of "+ Game.timerStop(), Toast.LENGTH_SHORT).show();
                 if (Game.finished()) {
                     Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
                 } else {
                     Game.nextProblem();
                     mathFragment.load(Game.getProblem().numberA, Game.getProblem().numberB);
+                    Game.timerStart();
                 }
             } else {
                 Toast.makeText(this, "Ans is" + answer, Toast.LENGTH_SHORT).show();
