@@ -10,16 +10,15 @@
     <fragment
         android:id="@+id/fragment_main"
         android:name="efx.com.multio.EquationFragment"
-        android:layout_width="146dp"
-        android:layout_height="217dp"
+        android:layout_width="145dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:layout="@layout/fragment_equation" />
 
     <TextView
@@ -67,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#4AAEA9"
         android:onClick="checkAnswer"
@@ -76,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_main" />
+        app:layout_constraintTop_toBottomOf="@+id/InputButtons" />
 
     <fragment
         android:id="@+id/InputButtons"
@@ -84,13 +83,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/confirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_main"
         tools:layout="@layout/fragment_inputbuttons" />
 
     <ImageButton
