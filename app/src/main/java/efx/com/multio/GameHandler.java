@@ -61,7 +61,7 @@ public class GameHandler {
     private ArrayList<Problem>   problems;
     private int score = 0;
     private CountDownTimer timer;
-    private long timeLeft = 3000;
+    private long timeLeft = 4000;
 
     public void generateProblems(){
         for(int i = 0; i < length; i++){
@@ -70,12 +70,12 @@ public class GameHandler {
     }
 
     public void timerStart() {
-        timeLeft = 3000;
+        timeLeft = 4000;
         timer.start();
     }
     public double timerStop() {
         timer.cancel();
-        return timeLeft / 1000;
+        return timeLeft / 1000.0;
     }
 
     public void nextProblem(){
