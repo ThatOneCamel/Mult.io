@@ -75,7 +75,7 @@ public class GameHandler {
     }
     public double timerStop() {
         timer.cancel();
-        return timeLeft / 100;
+        return timeLeft / 1000;
     }
 
     public void nextProblem(){
@@ -94,22 +94,23 @@ public class GameHandler {
         return index == length-1;
     }
 
-    public void addScore(float time) {
-        score+= 15*getMultiplier(time);
+    public void addScore(double time) {
+
+        score+= 10*getMultiplier(time);
     }
 
-    public double getMultiplier(float time) {
-        if( time > 2.5)
+    public double getMultiplier(double time) {
+        if( time >= 2.5)
             return 1.5;
-        if( time > 2.0)
+        else if( time >= 2.0)
             return 1.4;
-        if (time > 1.5)
+        else if (time >= 1.5)
             return 1.3;
-        if( time > 1.0)
+        else if( time >= 1.0)
             return 1.2;
-        if (time > 0.5)
+        else if (time >= 0.5)
             return 1.1;
-        return 1.0;
+        else return 1.0;
     }
     public int getScore() {
         return score;
