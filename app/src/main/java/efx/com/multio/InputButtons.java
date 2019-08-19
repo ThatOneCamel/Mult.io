@@ -52,11 +52,12 @@ public class InputButtons extends Fragment{
         int ID = R.id.btn0;
         for(int i = 0; i < 10; i ++)
         {
+            final int num = i;
             Buttons[i] = fragView.findViewById(ID+i);
             Buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callback.onClick(v,Integer.parseInt(getNum(v)));
+                    callback.onClick(v,num);
                 }
             });
         }
@@ -78,10 +79,5 @@ public class InputButtons extends Fragment{
         return fragView;
     }
 
-    public String getNum(View v)
-    {
-        ImageButton b = (ImageButton) v;
-        return b.getContentDescription().toString();
-    }
 
 }

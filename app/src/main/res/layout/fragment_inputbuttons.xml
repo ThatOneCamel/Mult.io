@@ -13,7 +13,6 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@null"
-        android:contentDescription="1"
         android:scaleType="centerCrop"
         android:src="@drawable/box1"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +24,6 @@
         android:layout_height="60dp"
         android:layout_marginStart="24dp"
         android:background="@null"
-        android:contentDescription="2"
         android:scaleType="centerCrop"
         android:src="@drawable/box2"
         app:layout_constraintStart_toEndOf="@+id/btn1"
@@ -37,7 +35,6 @@
         android:layout_height="60dp"
         android:layout_marginStart="24dp"
         android:background="@null"
-        android:contentDescription="3"
         android:scaleType="centerCrop"
         android:src="@drawable/box3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +47,6 @@
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:contentDescription="4"
         android:scaleType="centerCrop"
         android:src="@drawable/box4"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,10 +59,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:contentDescription="5"
         android:scaleType="centerCrop"
         android:src="@drawable/box5"
-        android:text="5"
         app:layout_constraintStart_toEndOf="@+id/btn4"
         app:layout_constraintTop_toBottomOf="@+id/btn2" />
 
@@ -77,10 +71,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:contentDescription="6"
         android:scaleType="centerCrop"
         android:src="@drawable/box6"
-        android:text="6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn5"
         app:layout_constraintTop_toBottomOf="@+id/btn3" />
@@ -91,10 +83,8 @@
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:contentDescription="7"
         android:scaleType="centerCrop"
         android:src="@drawable/box7"
-        android:text="7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn4" />
 
@@ -105,10 +95,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:contentDescription="8"
         android:scaleType="centerCrop"
         android:src="@drawable/box8"
-        android:text="8"
         app:layout_constraintStart_toEndOf="@+id/btn7"
         app:layout_constraintTop_toBottomOf="@+id/btn5" />
 
@@ -119,10 +107,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:contentDescription="9"
         android:scaleType="centerCrop"
         android:src="@drawable/box9"
-        android:text="9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn8"
         app:layout_constraintTop_toBottomOf="@+id/btn6" />
@@ -134,10 +120,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:contentDescription="0"
         android:scaleType="centerCrop"
         android:src="@drawable/box0"
-        android:text="0"
         app:layout_constraintStart_toEndOf="@+id/btnClear"
         app:layout_constraintTop_toBottomOf="@+id/btn8" />
 
