@@ -3,7 +3,6 @@ package efx.com.multio;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +13,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InputButtons extends Fragment{
+public class InputButtons extends Fragment {
 
     ImageButton [] Buttons;
     ImageButton clearBtn, enterBtn;
