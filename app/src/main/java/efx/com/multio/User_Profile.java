@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class User_Profile extends AppCompatActivity {
@@ -20,6 +19,13 @@ public class User_Profile extends AppCompatActivity {
 
         m_username = findViewById(R.id.txtUsername);
         m_title = findViewById(R.id.txtTitle);
+
+        findViewById(R.id.btnSignOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
     }
