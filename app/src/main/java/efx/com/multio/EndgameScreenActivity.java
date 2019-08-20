@@ -24,6 +24,11 @@ public class EndgameScreenActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
     public void Menu(View v) {
         Intent endIntent = new Intent(this,MainMenuActivity.class);
         startActivity(endIntent);

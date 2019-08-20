@@ -18,7 +18,7 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent gameplay = new Intent(getApplicationContext(), CampaignActivity.class);
                 startActivity(gameplay);
-                //finish();
+                finish();
             }
         });
 
@@ -37,6 +37,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 Intent endGame = new Intent(getApplicationContext(), EndgameScreenActivity.class);
                 endGame.putExtra("Score","50");
                 startActivity(endGame);
+                finish();
             }
         });
     }
