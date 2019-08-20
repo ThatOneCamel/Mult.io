@@ -2,6 +2,8 @@ package efx.com.multio;
 
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -18,6 +20,10 @@ enum Diff{
 
 public class GameHandler {
 
+    public interface OnTickUpdate{
+        void  updateTick();
+        void  finishTimer();
+    }
     public class Problem {
         public int numberA;
         public int numberB;
@@ -55,56 +61,44 @@ public class GameHandler {
     }
 
 
+
+
     public GameHandler() {
         length = 10;
         problems = new ArrayList<Problem>(length);
         generateProblems(length);
-        timer = new CountDownTimer(timeLeft,100) {
-            @Override
-            public void onTick(long l) {
-                timeLeft = l;
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        };
+        initTimer(4000,1000);
     }
 
     public GameHandler(int cap) {
         length = cap;
         problems = new ArrayList<Problem>(length);
         generateProblems(length);
-        timer = new CountDownTimer(timeLeft,100) {
-            @Override
-            public void onTick(long l) {
-                timeLeft = l;
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        };
+        initTimer(4000,1000);
     }
 
     public GameHandler(int cap, Diff d) {
         length = cap;
         problems = new ArrayList<Problem>(length);
-
         generateProblems(d,length);
-
+        initTimer(4000,1000);
     }
 
     public int index = 0;
-    private int length;
-    private ArrayList<Problem>   problems;
+    protected int length;
+    protected ArrayList<Problem>   problems;
     private int score = 0;
-    private CountDownTimer timer;
-    private long timeLeft = 4000;
+    protected CountDownTimer timer;
+    protected long timeLeft = 4000;
+    protected OnTickUpdate ticker;
+    protected int totalCorrect = 0;
 
-    public void initTimer(long T, long interval, Callable<Void> methodParam) {
+
+    public void setOnTickUpdate(OnTickUpdate ticker){
+        this.ticker = ticker;
+    }
+
+    public void initTimer(long T, long interval) {
         timeLeft = T;
         timer = new CountDownTimer(timeLeft,100) {
             @Override
@@ -120,12 +114,26 @@ public class GameHandler {
         };
     }
 
-    public void generateProblems(int cap){
+    public void timerStart() {
+        timeLeft = 4000;
+        timer.start();
+    }
+    public double timerStop() {
+        timer.cancel();
+        return timeLeft / 1000.0;
+    }
+
+    public int getTimeSeconds()
+    {
+        return (int) timeLeft/1000;
+    }
+
+    protected void generateProblems(int cap){
         for(int i = 0; i < cap; i++){
             problems.add(new Problem());
         }
     }
-    public void generateProblems(Diff d, int cap){
+    protected void generateProblems(Diff d, int cap){
         int E=0, M=0, H=0;
 
 
@@ -176,25 +184,29 @@ public class GameHandler {
         Collections.shuffle(problems);
     }
 
-    public void timerStart() {
-        timeLeft = 4000;
-        timer.start();
+    public void start(){
+        timerStart();
     }
-    public double timerStop() {
-        timer.cancel();
-        return timeLeft / 1000.0;
-    }
+
+
 
     public void nextProblem(){
         index++;
+        timerStart();
     }
 
     public Problem getProblem(){
         return problems.get(index);
     }
 
-    public boolean checkAnswer(int input) {
-        return input == problems.get(index).answer;
+    public boolean checkAnswer(int input, TextView v) {
+        boolean correct = input == problems.get(index).answer;
+        if(correct){
+            timerStop();
+            v.setText(getScore());
+            totalCorrect++;
+        }
+        return correct;
     }
 
     public boolean finished() {
@@ -202,7 +214,6 @@ public class GameHandler {
     }
 
     public void addScore(double time) {
-
         score+= 10*getMultiplier(time);
     }
 
@@ -221,5 +232,9 @@ public class GameHandler {
     }
     public String getScore() {
         return Integer.toString(score);
+    }
+
+    public int getTotalCorrect(){
+        return totalCorrect;
     }
 }

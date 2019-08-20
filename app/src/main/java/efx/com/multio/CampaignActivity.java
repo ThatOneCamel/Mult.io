@@ -22,7 +22,8 @@ public class CampaignActivity extends AppCompatActivity {
     GameHandler Game;
     CountDownTimer timer;
     TextView score;
-
+    TextView scoreWord;
+    String gamemode;
 
     private long timeLeft = 3500;
 
@@ -32,14 +33,34 @@ public class CampaignActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign);
-
-
+        gamemode = "Sixty";
 
         mathFragment = (EquationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
         inputFragment = (InputButtons) getSupportFragmentManager().findFragmentById(R.id.fragment_buttons);
         countDownFragment = (CountDownScreen) getSupportFragmentManager().findFragmentById(R.id.fragment_countdown);
         editor = findViewById(R.id.numInput);
         score = findViewById(R.id.ScoreView);
+        scoreWord = findViewById(R.id.ScoreWordView);
+
+        if(gamemode == "Campaign")
+            Game = new GameHandler();
+        else if(gamemode == "Sixty")
+        {
+            Game = new GameHandlerTimed(1000, 60000);
+            scoreWord.setText("Time Left");
+            score.setText(""+Game.getTimeSeconds());
+            Game.setOnTickUpdate(new GameHandler.OnTickUpdate() {
+                @Override
+                public void updateTick() {
+                    score.setText(""+Game.getTimeSeconds());
+                }
+
+                @Override
+                public void finishTimer() {
+                    endGameTimed();
+                }
+            });
+        }
 
 
         mathFragment.getView().setVisibility(View.INVISIBLE);
@@ -66,7 +87,8 @@ public class CampaignActivity extends AppCompatActivity {
         });
 
 
-        Game = new GameHandler();
+
+
         Game.generateProblems(Diff.MEDIUM,10);
 
         mathFragment.load(Game.getProblem().numberA,Game.getProblem().numberB);
@@ -104,7 +126,7 @@ public class CampaignActivity extends AppCompatActivity {
         mathFragment.getView().setVisibility(View.VISIBLE);
         inputFragment.getView().setVisibility(View.VISIBLE);
         countDownFragment.getView().setVisibility(View.INVISIBLE);
-        Game.timerStart();
+        Game.start();
     }
 
     public void checkAnswer(View n){
@@ -113,19 +135,15 @@ public class CampaignActivity extends AppCompatActivity {
         else {
             int input = Integer.parseInt(editor.getText().toString());
 
-            if (Game.checkAnswer(input)) {
+            if (Game.checkAnswer(input, score)) {
                 Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
                 editor.setText("");
-                Game.addScore(Game.timerStop());
-                score.setText(Game.getScore());
                 if (Game.finished()) {
                     Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
                     endGame();
                 } else {
                     Game.nextProblem();
-
                     mathFragment.load(Game.getProblem().numberA, Game.getProblem().numberB);
-                    Game.timerStart();
                 }
             } else {
                 Toast.makeText(this, "Ans is" + answer, Toast.LENGTH_SHORT).show();
@@ -133,6 +151,11 @@ public class CampaignActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+
+
 
     public void goToUserProfile(View v){
         Intent mIntent = new Intent(getApplicationContext(),User_Profile.class);
@@ -143,10 +166,21 @@ public class CampaignActivity extends AppCompatActivity {
     public void endGame()
     {
         Intent endIntent = new Intent(this,EndgameScreenActivity.class);
+        endIntent.putExtra("ScoreWord","Score");
         endIntent.putExtra("Score",Game.getScore());
         startActivity(endIntent);
         finish();
     }
+    public void endGameTimed()
+    {
+        Intent endIntent = new Intent(this,EndgameScreenActivity.class);
+        endIntent.putExtra("ScoreWord","Total Correct");
+        endIntent.putExtra("Score",""+Game.getTotalCorrect());
+        startActivity(endIntent);
+        finish();
+    }
+
+
 
     @Override
     public void onBackPressed() {
