@@ -3,12 +3,13 @@ package efx.com.multio;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -116,9 +117,10 @@ public class CampaignActivity extends AppCompatActivity {
                 Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
                 editor.setText("");
                 Game.addScore(Game.timerStop());
-                score.setText(Integer.toString(Game.getScore()));
+                score.setText(Game.getScore());
                 if (Game.finished()) {
                     Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
+                    endGame();
                 } else {
                     Game.nextProblem();
 
@@ -136,5 +138,18 @@ public class CampaignActivity extends AppCompatActivity {
         Intent mIntent = new Intent(getApplicationContext(),User_Profile.class);
         startActivity(mIntent);
         //finish();
+    }
+
+    public void endGame()
+    {
+        Intent endIntent = new Intent(this,EndgameScreenActivity.class);
+        endIntent.putExtra("Score",Game.getScore());
+        startActivity(endIntent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

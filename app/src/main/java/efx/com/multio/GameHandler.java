@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
+import java.util.concurrent.Callable;
+
 enum Diff{
     EASY,
     MEDIUM,
@@ -56,6 +58,7 @@ public class GameHandler {
     public GameHandler() {
         length = 10;
         problems = new ArrayList<Problem>(length);
+        generateProblems(length);
         timer = new CountDownTimer(timeLeft,100) {
             @Override
             public void onTick(long l) {
@@ -72,6 +75,7 @@ public class GameHandler {
     public GameHandler(int cap) {
         length = cap;
         problems = new ArrayList<Problem>(length);
+        generateProblems(length);
         timer = new CountDownTimer(timeLeft,100) {
             @Override
             public void onTick(long l) {
@@ -85,6 +89,14 @@ public class GameHandler {
         };
     }
 
+    public GameHandler(int cap, Diff d) {
+        length = cap;
+        problems = new ArrayList<Problem>(length);
+
+        generateProblems(d,length);
+
+    }
+
     public int index = 0;
     private int length;
     private ArrayList<Problem>   problems;
@@ -92,8 +104,24 @@ public class GameHandler {
     private CountDownTimer timer;
     private long timeLeft = 4000;
 
-    public void generateProblems(){
-        for(int i = 0; i < length; i++){
+    public void initTimer(long T, long interval, Callable<Void> methodParam) {
+        timeLeft = T;
+        timer = new CountDownTimer(timeLeft,100) {
+            @Override
+            public void onTick(long l)
+            {
+                timeLeft = l;
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+    }
+
+    public void generateProblems(int cap){
+        for(int i = 0; i < cap; i++){
             problems.add(new Problem());
         }
     }
@@ -191,7 +219,7 @@ public class GameHandler {
             return 1.1;
         else return 1.0;
     }
-    public int getScore() {
-        return score;
+    public String getScore() {
+        return Integer.toString(score);
     }
 }

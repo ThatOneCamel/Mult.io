@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -13,12 +12,10 @@ import androidx.fragment.app.Fragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CountDownScreen extends Fragment {
+public class InGameUser extends Fragment {
 
 
-    TextView timeView;
-
-    public CountDownScreen() {
+    public InGameUser() {
         // Required empty public constructor
     }
 
@@ -26,17 +23,8 @@ public class CountDownScreen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View fragView = inflater.inflate(R.layout.fragment_count_down_screen, container, false);
-       timeView = fragView.findViewById(R.id.timeText);
-
-
-        return fragView;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_in_game_user, container, false);
     }
-
-    public void updateCounter(String str){
-        timeView.setText(str);
-    }
-
-
 
 }
