@@ -8,6 +8,21 @@
     tools:context=".MainMenuActivity">
 
     <Button
+        android:id="@+id/gameStartBtn2"
+        style="@android:style/Widget.Material.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/rounded_button"
+        android:text="Quick Finger Challenge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameStartBtn" />
+
+    <Button
         android:id="@+id/gameStartBtn"
         style="@android:style/Widget.Material.Button.Colored"
         android:layout_width="0dp"
@@ -16,7 +31,7 @@
         android:layout_marginTop="256dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/rounded_button"
-        android:text="Start Game"
+        android:text="Campaign"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +46,7 @@
         android:text="View Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameStartBtn" />
+        app:layout_constraintTop_toBottomOf="@id/gameStartBtn2" />
 
     <Button
         android:id="@+id/btnEG"

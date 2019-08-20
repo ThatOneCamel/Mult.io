@@ -147,4 +147,9 @@ public class CampaignActivity extends AppCompatActivity {
         startActivity(endIntent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
