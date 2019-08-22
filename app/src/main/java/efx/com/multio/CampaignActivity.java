@@ -38,13 +38,14 @@ public class CampaignActivity extends AppCompatActivity {
         mathFragment = (EquationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
         inputFragment = (InputButtons) getSupportFragmentManager().findFragmentById(R.id.fragment_buttons);
         countDownFragment = (CountDownScreen) getSupportFragmentManager().findFragmentById(R.id.fragment_countdown);
+
         editor = findViewById(R.id.numInput);
         score = findViewById(R.id.ScoreView);
         scoreWord = findViewById(R.id.ScoreWordView);
 
-        if(gamemode == "Campaign")
+        if(gamemode.equals("Campaign"))
             Game = new GameHandler();
-        else if(gamemode == "Sixty")
+        else if(gamemode.equals("Sixty"))
         {
             Game = new GameHandlerTimed(1000, 60000);
             scoreWord.setText("Time Left");

@@ -16,6 +16,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/rounded_button"
+        android:enabled="false"
         android:text="Quick Finger Challenge"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +34,8 @@
         android:layout_marginTop="256dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/rounded_button"
-        android:text="Campaign"
+        android:backgroundTint="#3F51B5"
+        android:text="Singleplayer"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,9 +70,23 @@
         android:id="@+id/btnlogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Logout"
         tools:layout_editor_absoluteX="129dp"
         tools:layout_editor_absoluteY="36dp" />
+
+    <Button
+        android:id="@+id/mpButton"
+        style="@android:style/Widget.Material.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginEnd="96dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="#FFC107"
+        android:text="Multiplayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEG" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
