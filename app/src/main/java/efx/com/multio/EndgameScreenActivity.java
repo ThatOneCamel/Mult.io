@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EndgameScreenActivity extends AppCompatActivity {
 
     TextView scoreText;
+    TextView scoreWordText;
     String score;
+    String scoreWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +20,14 @@ public class EndgameScreenActivity extends AppCompatActivity {
         if(getIntent().getExtras() != null)
         {
             score = getIntent().getStringExtra("Score");
+            scoreWord = getIntent().getStringExtra("ScoreWord");
         }
+
         setContentView(R.layout.activity_endgame_screen);
         scoreText = findViewById(R.id.scoreNum);
         scoreText.setText(score);
+        scoreWordText = findViewById(R.id.textScore);
+        scoreWordText.setText(scoreWord);
 
     }
 

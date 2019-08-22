@@ -23,19 +23,26 @@ public class MainMenuActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        updateUI(account);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
         /* GOOGLE SIGN IN*/
-        final GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
 
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestEmail()
                     .build();
 
             mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-            updateUI(account);
+
 
         /* END GOOGLE SIGN IN */
 
@@ -93,7 +100,9 @@ public class MainMenuActivity extends AppCompatActivity {
                 });
     }
     private void updateUI(GoogleSignInAccount account) {
-        if(account != null){ return; }
+        if(account != null){
+            findViewById(R.id.btnSignOut).setVisibility(View.GONE);
+        }
         else { signIn(); }
     }
 
