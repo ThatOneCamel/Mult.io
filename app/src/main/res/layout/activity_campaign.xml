@@ -7,33 +7,6 @@
     android:background="@color/colorBG"
     tools:context=".CampaignActivity">
 
-    <fragment
-        android:id="@+id/fragment_main"
-        android:name="efx.com.multio.EquationFragment"
-        android:layout_width="145dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_equation" />
-
-    <fragment
-        android:id="@+id/fragment_buttons"
-        android:name="efx.com.multio.InputButtons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_main"
-        tools:layout="@layout/fragment_inputbuttons" />
-
     <TextView
         android:id="@+id/ScoreView"
         android:layout_width="wrap_content"
@@ -41,8 +14,8 @@
         android:layout_marginEnd="16dp"
         android:text="0"
         android:textAlignment="textEnd"
-        android:textSize="24sp"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ScoreWordView" />
 
@@ -53,10 +26,36 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Score"
-        android:textSize="24sp"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <fragment
+        android:id="@+id/fragment_main"
+        android:name="efx.com.multio.EquationFragment"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreView"
+        tools:layout="@layout/fragment_equation" />
+
+    <fragment
+        android:id="@+id/fragment_buttons"
+        android:name="efx.com.multio.InputButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_countdown"
+        app:layout_constraintVertical_bias="0.35000002"
+        tools:layout="@layout/fragment_inputbuttons" />
 
     <fragment
         android:id="@+id/fragment_countdown"
