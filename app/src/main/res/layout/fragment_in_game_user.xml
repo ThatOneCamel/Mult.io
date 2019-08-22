@@ -13,21 +13,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cameron"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
+        android:textColor="@color/colorBG"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/currImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
         app:layout_constraintStart_toEndOf="@+id/userCurr"
         app:layout_constraintTop_toBottomOf="@+id/userName"
-        app:srcCompat="@drawable/baseline_polymer_black_24" />
+        app:srcCompat="@drawable/coin_e" />
 
     <TextView
         android:id="@+id/userCurr"
@@ -35,10 +36,9 @@
         android:layout_height="wrap_content"
         android:text="100"
         android:textAlignment="textEnd"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorBG"
         android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/currImg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/currImg"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/userName"

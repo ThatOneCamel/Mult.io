@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.0"
@@ -22,7 +23,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+    implementation 'com.google.firebase:firebase-database:19.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation 'com.google.android.gms:play-services-games:18.0.1'
     //implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
@@ -31,5 +35,12 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+    implementation 'androidx.core:core:1.1.0-rc03'
+    implementation 'com.google.firebase:firebase-analytics:17.1.0'
+
+
 
 }
+
+apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
+

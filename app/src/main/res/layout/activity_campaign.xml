@@ -7,6 +7,19 @@
     android:background="@color/colorBG"
     tools:context=".CampaignActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="48dp"
+        android:background="#3C434B"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_countdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/ScoreView"
         android:layout_width="wrap_content"
@@ -14,8 +27,9 @@
         android:layout_marginEnd="16dp"
         android:text="0"
         android:textAlignment="textEnd"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorBG"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ScoreWordView" />
 
@@ -23,13 +37,12 @@
         android:id="@+id/ScoreWordView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Score"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorBG"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/fragment" />
 
     <fragment
         android:id="@+id/fragment_main"
@@ -75,9 +88,9 @@
         android:name="efx.com.multio.InGameUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_in_game_user" />
 

@@ -9,48 +9,43 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
+
+import com.google.android.gms.games.Games;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Arrays;
+import java.util.List;
+
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    int RC_SIGN_IN = 0;
-    GoogleSignInClient mGoogleSignInClient;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(account);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        /* GOOGLE SIGN IN*/
 
-
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail()
-                    .build();
-
-            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-
-        /* END GOOGLE SIGN IN */
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+        beginLogin();
 
         //Game Start
         findViewById(R.id.gameStartBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent gameplay = new Intent(getApplicationContext(), CampaignActivity.class);
+                triggerEvent();
                 startActivity(gameplay);
                 finish();
             }
@@ -79,31 +74,57 @@ public class MainMenuActivity extends AppCompatActivity {
         findViewById(R.id.btnlogout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signOut();
-                if(GoogleSignIn.getLastSignedInAccount(view.getContext()) == null)
+                AuthUI.getInstance()
+                        .signOut(getApplicationContext())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                // ...
+                            }
+                        });                if(GoogleSignIn.getLastSignedInAccount(view.getContext()) == null)
                 Toast.makeText(view.getContext(),"Signed out", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void signIn(){
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-    private void signOut(){
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+    private void beginLogin(){
 
-                    }
-                });
+        List<AuthUI.IdpConfig> providers = Arrays.asList(
+                new AuthUI.IdpConfig.EmailBuilder().build(),
+                new AuthUI.IdpConfig.GoogleBuilder().build());
+
+        // Create and launch sign-in intent
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                9001);
+
     }
-    private void updateUI(GoogleSignInAccount account) {
-        if(account != null){
-            findViewById(R.id.btnSignOut).setVisibility(View.GONE);
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 9001) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+
+            if (resultCode == RESULT_OK) {
+                // Successfully signed in
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                // ...
+            } else {
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
+                // ...
+            }
         }
-        else { signIn(); }
+    }
+
+
+    private void triggerEvent(){
+       Games.getEventsClient(this, GoogleSignIn.getLastSignedInAccount(this)).increment("CgkIhqKnwJIIEAIQAQ", 1);
     }
 
 }
