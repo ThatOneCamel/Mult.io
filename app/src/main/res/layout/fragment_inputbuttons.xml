@@ -145,7 +145,7 @@
         android:layout_marginTop="8dp"
         android:background="@null"
         android:scaleType="centerCrop"
-        android:src="@drawable/box_enter2"
+        android:src="@drawable/box_enter"
         android:text="Enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn0"
