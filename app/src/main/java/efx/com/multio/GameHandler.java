@@ -2,15 +2,11 @@ package efx.com.multio;
 
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
-import java.util.concurrent.Callable;
 
 enum Diff{
     EASY,
@@ -203,7 +199,10 @@ public class GameHandler {
         boolean correct = input == problems.get(index).answer;
         if(correct){
             timerStop();
+            addScore(getTimeSeconds());
             v.setText(getScore());
+
+            Log.i("SCORE UPDATER", getScore());
             totalCorrect++;
         }
         return correct;
