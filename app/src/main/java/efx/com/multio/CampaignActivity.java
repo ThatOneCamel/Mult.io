@@ -32,7 +32,8 @@ public class CampaignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign);
 
-        gamemode = "Campaign"; //Current gamemode
+        gamemode = getIntent().getStringExtra("mode");
+
 
         //Assigning references to all Fragments
         mathFragment = (EquationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);

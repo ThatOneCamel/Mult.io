@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 
@@ -16,7 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.games.Games;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -32,6 +34,9 @@ public class MainMenuActivity extends AppCompatActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
     public GoogleSignInClient mGoogleSignInClient;
+    boolean primaryActive;
+    private ConstraintLayout primaryView;
+    private LinearLayout gameModeView;
 
 
 
@@ -49,6 +54,10 @@ public class MainMenuActivity extends AppCompatActivity {
         final Button logoutBtn = findViewById(R.id.btnlogout);
         final Button signInBtn = findViewById(R.id.mpButton);
 
+        gameModeView = findViewById(R.id.singleplayerView);
+        primaryView = findViewById(R.id.primaryView);
+
+
 
 
         //TODO CHANGE THIS TO BE USED PROPERLY
@@ -61,13 +70,27 @@ public class MainMenuActivity extends AppCompatActivity {
 
 
         //Game Start
-        findViewById(R.id.gameStartBtn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnOpenModes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gameplay = new Intent(getApplicationContext(), CampaignActivity.class);
-                triggerEvent();
-                startActivity(gameplay);
-                finish();
+                primaryView.setVisibility(View.GONE);
+                gameModeView.setVisibility(View.VISIBLE);
+                primaryActive = false;
+
+            }
+        });
+
+        findViewById(R.id.btnCampaignMode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeActivity("Campaign");
+            }
+        });
+
+        findViewById(R.id.btnTimeTrials).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeActivity("Sixty");
             }
         });
 
@@ -193,5 +216,24 @@ public class MainMenuActivity extends AppCompatActivity {
         //Games.getEventsClient(this, GoogleSignIn.getLastSignedInAccount(this)).increment("CgkIhqKnwJIIEAIQAQ", 1);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        if (!primaryActive){
+            gameModeView.setVisibility(View.GONE);
+            primaryView.setVisibility(View.VISIBLE);
+            primaryActive=true;
+        }
+    }
+
+    private void changeActivity(String gamemode){
+        Intent gameplay = new Intent(getApplicationContext(), CampaignActivity.class);
+        gameplay.putExtra("mode", gamemode);
+        triggerEvent();
+        startActivity(gameplay);
+        finish();
+    }
+
+
 
 }
