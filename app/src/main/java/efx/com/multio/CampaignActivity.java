@@ -32,8 +32,11 @@ public class CampaignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign);
 
-        gamemode = getIntent().getStringExtra("mode");
-
+        try {
+            gamemode = getIntent().getStringExtra("mode");
+        } catch (Exception e){
+            Log.e("Intent Extras ERROR", e.getLocalizedMessage());
+        }
 
         //Assigning references to all Fragments
         mathFragment = (EquationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
@@ -206,8 +209,10 @@ public class CampaignActivity extends AppCompatActivity {
         Intent endIntent = new Intent(this,EndgameScreenActivity.class);
         endIntent.putExtra("ScoreWord","Score");
         endIntent.putExtra("Score",Game.getScore());
+        endIntent.putExtra("mode", gamemode);
         startActivity(endIntent);
         finish();
+        User.player.getPlayerWallet().addMoney(25);
     }
 
     //Display results screen for time trial mode
@@ -216,6 +221,7 @@ public class CampaignActivity extends AppCompatActivity {
         Intent endIntent = new Intent(this,EndgameScreenActivity.class);
         endIntent.putExtra("ScoreWord","Total Correct");
         endIntent.putExtra("Score",""+Game.getTotalCorrect());
+        endIntent.putExtra("mode", gamemode);
         startActivity(endIntent);
         finish();
     }

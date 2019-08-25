@@ -38,13 +38,13 @@ public class MainMenuActivity extends AppCompatActivity {
     private ConstraintLayout primaryView;
     private LinearLayout gameModeView;
 
+    //public static User player;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
@@ -54,11 +54,10 @@ public class MainMenuActivity extends AppCompatActivity {
         final Button logoutBtn = findViewById(R.id.btnlogout);
         final Button signInBtn = findViewById(R.id.mpButton);
 
-        gameModeView = findViewById(R.id.singleplayerView);
         primaryView = findViewById(R.id.primaryView);
-
-
-
+        gameModeView = findViewById(R.id.singleplayerView);
+        //Initializing User class
+        //player = new User();
 
         //TODO CHANGE THIS TO BE USED PROPERLY
         if(mAuth.getCurrentUser() == null){
@@ -119,6 +118,7 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent endGame = new Intent(getApplicationContext(), EndgameScreenActivity.class);
                 endGame.putExtra("Score","50");
+                endGame.putExtra("mode", "Campaign");
                 startActivity(endGame);
                 finish();
             }

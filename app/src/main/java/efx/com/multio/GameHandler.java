@@ -208,25 +208,25 @@ public class GameHandler {
         return correct;
     }
 
-    public boolean finished() {
+    boolean finished() {
         return index == length-1;
     }
 
-    public void addScore(double time) {
+    private void addScore(double time) {
         score+= 10*getMultiplier(time);
     }
 
-    public double getMultiplier(double time) {
+    private double getMultiplier(double time) {
         if( time >= 2.5)
-            return 1.5;
+            return 15.0;
         else if( time >= 2.0)
-            return 1.4;
+            return 14.0;
         else if (time >= 1.5)
-            return 1.3;
+            return 13.0;
         else if( time >= 1.0)
-            return 1.2;
+            return 12.0;
         else if (time >= 0.5)
-            return 1.1;
+            return 10.0;
         else return 1.0;
     }
     public String getScore() {
