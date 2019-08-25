@@ -210,9 +210,10 @@ public class CampaignActivity extends AppCompatActivity {
         endIntent.putExtra("ScoreWord","Score");
         endIntent.putExtra("Score",Game.getScore());
         endIntent.putExtra("mode", gamemode);
+        endIntent.putExtra("money", calculateEarnings());
+
         startActivity(endIntent);
         finish();
-        User.player.getPlayerWallet().addMoney(25);
     }
 
     //Display results screen for time trial mode
@@ -222,8 +223,39 @@ public class CampaignActivity extends AppCompatActivity {
         endIntent.putExtra("ScoreWord","Total Correct");
         endIntent.putExtra("Score",""+Game.getTotalCorrect());
         endIntent.putExtra("mode", gamemode);
+        endIntent.putExtra("money", calculateEarnings());
+
         startActivity(endIntent);
         finish();
+    }
+
+    private int calculateEarnings(){
+
+        switch (gamemode){
+            case "Campaign":
+                return(Integer.parseInt(Game.getScore()) / 30);
+
+            case "Sixty":
+                return (getTimedRank(Game.getTotalCorrect()));
+
+            default:
+                return 20;
+
+        }
+
+    }
+
+    private int getTimedRank(int total){
+        if (total < 10)
+            return 5;
+        else if (total < 20)
+            return 15;
+        else if (total < 30)
+            return 25;
+        else if (total < 40)
+            return 35;
+        else
+            return 50 + (total / 10);
     }
 
 
