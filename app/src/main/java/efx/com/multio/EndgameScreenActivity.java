@@ -39,6 +39,7 @@ public class EndgameScreenActivity extends AppCompatActivity {
         TextView amountEarned = findViewById(R.id.currencyNum);
         TextView walletDisplay = findViewById(R.id.walletTotal);
         User.player.getPlayerWallet().addMoney(money);
+        User.player.saveLocalData(getApplicationContext());
 
 
 

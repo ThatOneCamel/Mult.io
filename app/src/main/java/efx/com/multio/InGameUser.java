@@ -2,6 +2,7 @@ package efx.com.multio;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class InGameUser extends Fragment {
 
         TextView walletDisplay = v.findViewById(R.id.userCurr);
         walletDisplay.setText(Integer.toString(User.player.getPlayerWallet().getWallet()));
+        Log.wtf("WHAT", Integer.toString(User.player.getPlayerWallet().getWallet()));
 
         return v;
     }
