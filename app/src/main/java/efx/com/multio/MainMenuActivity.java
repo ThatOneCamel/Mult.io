@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,7 +28,14 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -37,6 +46,10 @@ public class MainMenuActivity extends AppCompatActivity {
     boolean primaryActive;
     private ConstraintLayout primaryView;
     private LinearLayout gameModeView;
+    private TextView nameUser;
+    private DatabaseReference dataRef;
+
+
 
     //public static User player;
 
@@ -51,21 +64,29 @@ public class MainMenuActivity extends AppCompatActivity {
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
         mAuth = FirebaseAuth.getInstance();
 
+        dataRef = FirebaseDatabase.getInstance().getReference();
+
         final Button logoutBtn = findViewById(R.id.btnlogout);
         final Button signInBtn = findViewById(R.id.mpButton);
+        nameUser = findViewById(R.id.userName);
 
         primaryView = findViewById(R.id.primaryView);
         gameModeView = findViewById(R.id.singleplayerView);
         //Initializing User class
         //player = new User();
-
         //TODO CHANGE THIS TO BE USED PROPERLY
+        String name;
         if(mAuth.getCurrentUser() == null){
+
+            name = "User";
             logoutBtn.setEnabled(false);
         } else {
-
             signInBtn.setEnabled(false);
         }
+
+        //loadUser();
+
+
 
 
         //Game Start
@@ -110,17 +131,30 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent profile = new Intent(getApplicationContext(), User_Profile.class);
                 startActivity(profile);
+
             }
         });
 
-        findViewById(R.id.btnEG).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnUsername).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent endGame = new Intent(getApplicationContext(), EndgameScreenActivity.class);
+               /* Intent endGame = new Intent(getApplicationContext(), EndgameScreenActivity.class);
                 endGame.putExtra("Score","50");
                 endGame.putExtra("mode", "Campaign");
                 startActivity(endGame);
                 finish();
+
+                */
+
+               FireUser f = new FireUser(User.player);
+               Log.i("FireUser",f.toString());
+               String key = dataRef.child(mAuth.getCurrentUser().getUid()).push().getKey();
+               Map<String, Object> userVal = f.toMap();
+               Map<String,Object> childUpdates = new HashMap<>();
+               childUpdates.put(key,userVal);
+               dataRef.child(mAuth.getCurrentUser().getUid()).child("fireUser").setValue(f);
+
+
             }
         });
 
@@ -146,7 +180,37 @@ public class MainMenuActivity extends AppCompatActivity {
 
             }
         });
+
+        findViewById(R.id.saveUser).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }//END onCreate()
+
+    private void loadUser(){
+
+        dataRef.child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                FireUser temp = dataSnapshot.child("fireUser").getValue(FireUser.class);
+
+                User.player =new User(temp);
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     private void beginLogin(){
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

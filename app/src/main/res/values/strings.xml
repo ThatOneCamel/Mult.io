@@ -16,7 +16,8 @@
 
     <string name="singleplayer">"Single Player"</string>
     <string name="multiplayer">"Multiplayer"</string>
-    <string name="time_trial">"Time Trials"</string>
+    <string name="time_trial">"Time Trial"</string>
+    <string name="save_user">"Save User"</string>
     <string name="campaign">"Campaign"</string>
 
     <string name="logout">Logout</string>

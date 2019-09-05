@@ -26,21 +26,21 @@
             android:backgroundTint="#3F51B5"
             android:text="@string/singleplayer"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/gameStartBtn2"
+            app:layout_constraintBottom_toTopOf="@+id/saveUser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             tools:visibility="visible" />
 
         <Button
-            android:id="@+id/gameStartBtn2"
+            android:id="@+id/saveUser"
             style="@android:style/Widget.Material.Button.Colored"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:background="@drawable/rounded_button"
-            android:enabled="false"
-            android:text="@string/time_trial"
+            android:enabled="true"
+            android:text="@string/save_user"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/viewProfileBtn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
             tools:visibility="visible" />
 
         <Button
-            android:id="@+id/btnEG"
+            android:id="@+id/btnUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -64,7 +64,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/view_profile"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/btnEG"
+            app:layout_constraintBottom_toTopOf="@+id/btnUsername"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:visibility="visible" />
@@ -91,6 +91,27 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
