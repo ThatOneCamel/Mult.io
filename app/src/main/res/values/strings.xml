@@ -12,4 +12,21 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+
+    <string name="singleplayer">"Single Player"</string>
+    <string name="multiplayer">"Multiplayer"</string>
+    <string name="time_trial">"Time Trial"</string>
+    <string name="save_user">"Save User"</string>
+    <string name="campaign">"Campaign"</string>
+
+    <string name="logout">Logout</string>
+    <string name="view_profile">"View Profile"</string>
+
+    <!-- TODO: DEBUG STRINGS -->
+    <string name="endgame">"See Endgame"</string>
+
+
+
+
 </resources>

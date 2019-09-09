@@ -7,86 +7,143 @@
     android:layout_height="match_parent"
     tools:context=".MainMenuActivity">
 
-    <Button
-        android:id="@+id/gameStartBtn2"
-        style="@android:style/Widget.Material.Button.Colored"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/rounded_button"
-        android:enabled="false"
-        android:text="Quick Finger Challenge"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameStartBtn"
-        tools:visibility="visible" />
-
-    <Button
-        android:id="@+id/gameStartBtn"
-        style="@android:style/Widget.Material.Button.Colored"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="256dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="#3F51B5"
-        android:text="Singleplayer"
-        android:visibility="visible"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/primaryView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/viewProfileBtn"
+        <Button
+            android:id="@+id/btnOpenModes"
+            style="@android:style/Widget.Material.Button.Colored"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#3F51B5"
+            android:text="@string/singleplayer"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/saveUser"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/saveUser"
+            style="@android:style/Widget.Material.Button.Colored"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_button"
+            android:enabled="true"
+            android:text="@string/save_user"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/viewProfileBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/endgame"
+            app:layout_constraintBottom_toTopOf="@+id/mpButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/viewProfileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/view_profile"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/btnUsername"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/mpButton"
+            style="@android:style/Widget.Material.Button.Colored"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#FFC107"
+            android:text="@string/multiplayer"
+            app:layout_constraintBottom_toTopOf="@+id/btnlogout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnlogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="64dp"
+            android:text="@string/logout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/singleplayerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="View Profile"
-        android:visibility="visible"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gameStartBtn2"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btnEG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="EndGame"
-        app:layout_constraintEnd_toEndOf="@+id/viewProfileBtn"
-        app:layout_constraintStart_toStartOf="@+id/viewProfileBtn"
-        app:layout_constraintTop_toBottomOf="@+id/viewProfileBtn" />
+        <Button
+            android:id="@+id/btnTimeTrials"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/time_trial"
+            android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/btnlogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="36dp" />
+        <Button
+            android:id="@+id/btnCampaignMode"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/campaign"
+            android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/mpButton"
-        style="@android:style/Widget.Material.Button.Colored"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginEnd="96dp"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="#FFC107"
-        android:text="Multiplayer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEG" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

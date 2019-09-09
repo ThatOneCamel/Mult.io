@@ -8,15 +8,6 @@
     android:background="@color/colorBG"
     tools:context=".EndgameScreenActivity">
 
-    <fragment
-        android:id="@+id/fragment_inGameUser"
-        android:name="efx.com.multio.InGameUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_in_game_user" />
-
     <Button
         android:id="@+id/btnRetMainMenu"
         android:layout_width="100dp"
@@ -100,5 +91,28 @@
         app:layout_constraintStart_toEndOf="@+id/currencyNum"
         app:layout_constraintTop_toTopOf="@+id/currencyNum"
         app:srcCompat="@drawable/baseline_polymer_black_24" />
+
+    <TextView
+        android:id="@+id/walletTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:text="1000"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/walletTotal"
+        app:layout_constraintStart_toEndOf="@+id/walletTotal"
+        app:layout_constraintTop_toTopOf="@+id/walletTotal"
+        app:srcCompat="@drawable/coin_e" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
