@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBG"
     tools:context=".MainMenuActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/primaryView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,78 +20,30 @@
         <Button
             android:id="@+id/btnOpenModes"
             style="@android:style/Widget.Material.Button.Colored"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="#3F51B5"
-            android:text="@string/singleplayer"
+            android:layout_width="272dp"
+            android:layout_height="72dp"
+            android:background="@drawable/startgame"
+            android:backgroundTint="@null"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/saveUser"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
-
-        <Button
-            android:id="@+id/saveUser"
-            style="@android:style/Widget.Material.Button.Colored"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/rounded_button"
-            android:enabled="true"
-            android:text="@string/save_user"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/viewProfileBtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:visibility="visible" />
-
-        <Button
-            android:id="@+id/btnUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="@string/endgame"
-            app:layout_constraintBottom_toTopOf="@+id/mpButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/viewProfileBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/view_profile"
+            android:layout_width="232dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/profile_view"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/btnUsername"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnOpenModes"
             tools:visibility="visible" />
-
-        <Button
-            android:id="@+id/mpButton"
-            style="@android:style/Widget.Material.Button.Colored"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/rounded_button"
-            android:backgroundTint="#FFC107"
-            android:text="@string/multiplayer"
-            app:layout_constraintBottom_toTopOf="@+id/btnlogout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btnlogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="64dp"
-            android:text="@string/logout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/userName"
@@ -101,17 +54,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -126,24 +68,56 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
+            android:id="@+id/btnExtremeMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorDarkBG"
+            android:text="Extreme 20"
+            android:textColor="@color/colorBG" />
+
+        <Button
             android:id="@+id/btnTimeTrials"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorDarkBG"
             android:text="@string/time_trial"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/colorBG" />
 
         <Button
             android:id="@+id/btnCampaignMode"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorDarkBG"
+            android:fontFamily="@font/roboto_bold"
             android:text="@string/campaign"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/colorBG"
+            android:textSize="14sp" />
 
         <Space
-            android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCustomMode"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/colorDarkBG"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/custom"
+        android:textAlignment="center"
+        android:textColor="@color/colorBG"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

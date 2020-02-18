@@ -22,6 +22,7 @@ public class CampaignActivity extends AppCompatActivity {
     TextView score;
     TextView scoreWord;
     String gamemode;
+    int difficulty;
 
     private long timeLeft = 3500;
 
@@ -34,6 +35,8 @@ public class CampaignActivity extends AppCompatActivity {
 
         try {
             gamemode = getIntent().getStringExtra("mode");
+            difficulty = getIntent().getIntExtra("setting", 1);
+
         } catch (Exception e){
             Log.e("Intent Extras ERROR", e.getLocalizedMessage());
         }
@@ -47,8 +50,6 @@ public class CampaignActivity extends AppCompatActivity {
         score = findViewById(R.id.ScoreView);
         scoreWord = findViewById(R.id.ScoreWordView);
         editor = findViewById(R.id.numInput);
-
-        setGamemode(gamemode);
 
         //Hiding elements except for countdown timer
         try {
@@ -85,8 +86,8 @@ public class CampaignActivity extends AppCompatActivity {
 
 
         });
-
-        Game.generateProblems(Diff.MEDIUM,10);
+        setGamemode(gamemode);
+        setGameDifficulty(difficulty);
         mathFragment.load(Game.getProblem().numberA, Game.getProblem().numberB);
 
 
@@ -100,7 +101,7 @@ public class CampaignActivity extends AppCompatActivity {
 
         switch (gamemode){
             case "Campaign":
-                Game = new GameHandler();
+                Game = new GameHandler(10);
                 break;
 
             case "Sixty":
@@ -120,9 +121,28 @@ public class CampaignActivity extends AppCompatActivity {
                 });
                 break;
 
+            case "Extreme20":
+                Game = new GameHandler(20);
+                break;
+
             default:
                 Game = new GameHandler();
                 break;
+        }
+    }
+
+    private void setGameDifficulty(int d){
+        switch(d){
+            case 0:
+                Game.generateProblems(Diff.EASY, 10);
+                break;
+            case 1:
+                Game.generateProblems(Diff.MEDIUM,10);
+                break;
+            case 2:
+                Game.generateProblems(Diff.HARD, 10);
+            case 3:
+                Game.generateProblems(Diff.EXTREME, 20);
         }
     }
 
@@ -207,8 +227,9 @@ public class CampaignActivity extends AppCompatActivity {
     private void endGame()
     {
         Intent endIntent = new Intent(this,EndgameScreenActivity.class);
-        endIntent.putExtra("ScoreWord","Score");
+        endIntent.putExtra("ScoreWord","Score"); //WHY???
         endIntent.putExtra("Score",Game.getScore());
+        endIntent.putExtra("ScoreInt", Game.getIntScore());
         endIntent.putExtra("mode", gamemode);
         endIntent.putExtra("money", calculateEarnings());
 
@@ -221,7 +242,8 @@ public class CampaignActivity extends AppCompatActivity {
     {
         Intent endIntent = new Intent(this,EndgameScreenActivity.class);
         endIntent.putExtra("ScoreWord","Total Correct");
-        endIntent.putExtra("Score",""+Game.getTotalCorrect());
+        endIntent.putExtra("Score",""+ Game.getTotalCorrect());
+        endIntent.putExtra("ScoreInt", Game.getIntScore());
         endIntent.putExtra("mode", gamemode);
         endIntent.putExtra("money", calculateEarnings());
 

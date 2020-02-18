@@ -11,7 +11,8 @@ import java.util.Random;
 enum Diff{
     EASY,
     MEDIUM,
-    HARD
+    HARD,
+    EXTREME
 }
 
 public class GameHandler {
@@ -50,6 +51,12 @@ public class GameHandler {
                     numberB = rand.nextInt(12)+1;
                     answer = numberA * numberB;
                     break;
+                case EXTREME:
+                    numberA = rand.nextInt(10) + 7;
+                    numberB = rand.nextInt(10) + 8;
+                    answer = numberA * numberB;
+                    break;
+
             }
 
         }
@@ -130,7 +137,7 @@ public class GameHandler {
         }
     }
     protected void generateProblems(Diff d, int cap){
-        int E=0, M=0, H=0;
+        int E=0, M=0, H=0, Ex=0;
 
 
         switch(d){
@@ -173,10 +180,25 @@ public class GameHandler {
                     problems.add(new Problem(Diff.HARD));
                 }
                 break;
+            case EXTREME:
+                H = (int) Math.floor(cap * .4);
+                Ex = (int) Math.floor(cap * .5);
+                M = cap - Ex - H;
+                for(int i = 0; i < Ex; i++){
+                    problems.add(new Problem(Diff.EXTREME));
+                }
+                for(int i = 0; i < M; i++){
+                    problems.add(new Problem(Diff.MEDIUM));
+                }
+                for(int i = 0; i < H; i++){
+                    problems.add(new Problem(Diff.HARD));
+                }
+                break;
         }
         Log.i("Easy",""+E);
         Log.i("Medium",""+M);
         Log.i("Hard",""+H);
+        Log.i("Extreme",""+Ex);
         Collections.shuffle(problems);
     }
 
@@ -232,6 +254,8 @@ public class GameHandler {
     public String getScore() {
         return Integer.toString(score);
     }
+
+    public int getIntScore() {return score; }
 
     public int getTotalCorrect(){
         return totalCorrect;

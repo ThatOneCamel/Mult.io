@@ -2,16 +2,6 @@ package efx.com.multio;
 
 import android.content.Context;
 import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,15 +9,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class User implements Serializable {
 
     static User player = new User();
-
-
-
 
     /* FUNCTIONS */
         public String getUsername(){ return m_username; }
@@ -64,19 +50,9 @@ public class User implements Serializable {
         friends = new ArrayList<String>();
         G_Won = 17;
         */
+        m_wallet = new PlayerWallet();
+        setB_Score(0);
 
-    }
-
-    User(FireUser fUser){
-        m_username = fUser.getUsername();
-        m_title = "Mathlete";//fUser.getTitle();
-        m_wallet = new PlayerWallet(fUser.getCoins());
-        B_Score = fUser.getB_score();
-        B_Time = fUser.getB_time();
-        TitleArray = fUser.getTitles();
-        BadgeArray = fUser.getBadges();
-        friends = fUser.getF_IDs();
-        G_Won = fUser.getG_won();
     }
 
     public int getG_Won() {
@@ -87,6 +63,7 @@ public class User implements Serializable {
         G_Won = g_Won;
     }
 
+    public void addGameWon() { G_Won += 1; }
 
     public String getTitleArray() {
         return TitleArray;
@@ -236,119 +213,4 @@ public class User implements Serializable {
 
     }
 
-}
-
-class FireUser implements Serializable{
-    private String username,titles,badges,tag;
-    private int B_score,B_time, coins, title, G_won;
-    private ArrayList<String> f_IDs;
-
-    public FireUser(User u){
-        username = u.getUsername();
-        titles = u.getTitleArray();
-        badges = u.getBadgeArray();
-        B_score = u.getB_Score();
-        B_time = u.getB_Time();
-        coins = u.getM_wallet().getWallet();
-        //title = u.getTitle();
-        G_won = u.getG_Won();
-        f_IDs = u.getFriends();
-
-    }
-
-    public FireUser(){}
-
-
-    public Map<String, Object> toMap(){
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("username",username);
-        result.put("titles",titles);
-        result.put("badges",badges);
-        result.put("B_score",B_score);
-        result.put("B_time",B_time);
-        result.put("coins",coins);
-        result.put("G_won",G_won);
-        result.put("f_IDs",f_IDs);
-        return result;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getTitles() {
-        return titles;
-    }
-
-    public void setTitles(String titles) {
-        this.titles = titles;
-    }
-
-    public String getBadges() {
-        return badges;
-    }
-
-    public void setBadges(String badges) {
-        this.badges = badges;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public int getB_score() {
-        return B_score;
-    }
-
-    public void setB_score(int b_score) {
-        B_score = b_score;
-    }
-
-    public int getB_time() {
-        return B_time;
-    }
-
-    public void setB_time(int b_time) {
-        B_time = b_time;
-    }
-
-    public int getCoins() {
-        return coins;
-    }
-
-    public void setCoins(int coins) {
-        this.coins = coins;
-    }
-
-    public int getTitle() {
-        return title;
-    }
-
-    public void setTitle(int title) {
-        this.title = title;
-    }
-
-    public int getG_won() {
-        return G_won;
-    }
-
-    public void setG_won(int g_won) {
-        G_won = g_won;
-    }
-
-    public ArrayList<String> getF_IDs() {
-        return f_IDs;
-    }
-
-    public void setF_IDs(ArrayList<String> f_IDs) {
-        this.f_IDs = f_IDs;
-    }
 }

@@ -3,6 +3,7 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorBG">#FFECC6</color>
+    <color name="colorDarkBG">#3C434B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorProfileBorder">#62594F</color>
 </resources>

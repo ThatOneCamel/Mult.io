@@ -19,6 +19,7 @@
     <string name="time_trial">"Time Trial"</string>
     <string name="save_user">"Save User"</string>
     <string name="campaign">"Campaign"</string>
+    <string name="custom">"Custom"</string>
 
     <string name="logout">Logout</string>
     <string name="view_profile">"View Profile"</string>

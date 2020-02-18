@@ -15,6 +15,7 @@ public class EndgameScreenActivity extends AppCompatActivity {
     String score;
     String scoreWord;
     String gamemode;
+    int scoreInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class EndgameScreenActivity extends AppCompatActivity {
             score = getIntent().getStringExtra("Score");
             scoreWord = getIntent().getStringExtra("ScoreWord");
             gamemode = getIntent().getStringExtra("mode");
+            scoreInt = getIntent().getIntExtra("ScoreInt", 0);
             money = getIntent().getIntExtra("money", 0);
         } else {
             gamemode = "Campaign";
@@ -36,9 +38,17 @@ public class EndgameScreenActivity extends AppCompatActivity {
         scoreText.setText(score);
         scoreWordText = findViewById(R.id.textScore);
         scoreWordText.setText(scoreWord);
+
         TextView amountEarned = findViewById(R.id.currencyNum);
         TextView walletDisplay = findViewById(R.id.walletTotal);
         User.player.getPlayerWallet().addMoney(money);
+        User.player.addGameWon();
+
+        if (gamemode.equals("Campaign") && scoreInt > User.player.getB_Score())
+            User.player.setB_Score(scoreInt);
+        else if (gamemode.equals("Sixty") && scoreInt > User.player.getB_Time())
+            User.player.setB_Time(scoreInt);
+
         User.player.saveLocalData(getApplicationContext());
 
 
