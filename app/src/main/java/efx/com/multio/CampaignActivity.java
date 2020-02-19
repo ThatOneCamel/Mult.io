@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import efx.com.multio.MainMenuActivity.Gamemode;
 
 public class CampaignActivity extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class CampaignActivity extends AppCompatActivity {
     CountDownTimer timer;
     TextView score;
     TextView scoreWord;
-    String gamemode;
+   Gamemode gamemode;
     int difficulty;
 
     private long timeLeft = 3500;
@@ -34,7 +35,7 @@ public class CampaignActivity extends AppCompatActivity {
         setContentView(R.layout.activity_campaign);
 
         try {
-            gamemode = getIntent().getStringExtra("mode");
+            gamemode = (Gamemode) getIntent().getSerializableExtra("mode");
             difficulty = getIntent().getIntExtra("setting", 1);
 
         } catch (Exception e){
@@ -97,14 +98,14 @@ public class CampaignActivity extends AppCompatActivity {
 
     }//End OnCreate
 
-    private void setGamemode(String gamemode){
+    private void setGamemode(Gamemode gamemode){
 
         switch (gamemode){
-            case "Campaign":
+            case CAMPAIGN:
                 Game = new GameHandler(10);
                 break;
 
-            case "Sixty":
+            case TIMED:
                 Game = new GameHandlerTimed(1000, 60000);
                 scoreWord.setText("Time Left");
                 score.setText(""+Game.getTimeSeconds());
@@ -121,8 +122,12 @@ public class CampaignActivity extends AppCompatActivity {
                 });
                 break;
 
-            case "Extreme20":
+            case EXTREME:
                 Game = new GameHandler(20);
+                break;
+
+            case CUSTOM:
+                Game = new GameHandler(25);
                 break;
 
             default:
@@ -254,11 +259,14 @@ public class CampaignActivity extends AppCompatActivity {
     private int calculateEarnings(){
 
         switch (gamemode){
-            case "Campaign":
+            case CAMPAIGN:
                 return(Integer.parseInt(Game.getScore()) / 30);
 
-            case "Sixty":
+            case TIMED:
                 return (getTimedRank(Game.getTotalCorrect()));
+
+            case CUSTOM:
+                return(Integer.parseInt(Game.getScore()) / 85);
 
             default:
                 return 20;

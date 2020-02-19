@@ -1,5 +1,6 @@
 package efx.com.multio;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -19,10 +21,12 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button customView;
     private TextView nameUser;
 
-
-
-    //public static User player;
-
+    public enum Gamemode {
+        CAMPAIGN,
+        TIMED,
+        EXTREME,
+        CUSTOM
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,21 +53,21 @@ public class MainMenuActivity extends AppCompatActivity {
         findViewById(R.id.btnCampaignMode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeActivity("Campaign", 1);
+                changeActivity(Gamemode.CAMPAIGN, 1);
             }
         });
 
         findViewById(R.id.btnTimeTrials).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeActivity("Sixty", 1);
+                changeActivity(Gamemode.TIMED, 1);
             }
         });
 
         findViewById(R.id.btnExtremeMode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeActivity("Extreme20", 3);
+                changeActivity(Gamemode.EXTREME, 3);
             }
         });
 
@@ -82,8 +86,9 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 String mode = "";
                 int difficulty = -1;
+                startDialog();
                 if(!mode.isEmpty() && difficulty != -1)
-                    changeActivity(mode, difficulty);
+                    changeActivity(Gamemode.CUSTOM, difficulty);
             }
         });
 
@@ -101,12 +106,42 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
-    private void changeActivity(String gamemode, int difficulty){
+    private void changeActivity(Gamemode gamemode, int difficulty){
         Intent gameplay = new Intent(getApplicationContext(), CampaignActivity.class);
         gameplay.putExtra("mode", gamemode);
         gameplay.putExtra("setting", difficulty);
         startActivity(gameplay);
         finish();
+    }
+
+    private void startDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
+        builder.setTitle("Choose an animal");
+
+        // add a radio button list
+        final String[] animals = {"horse", "cow", "camel", "sheep", "goat"};
+        int checkedItem = 1; // cow
+        builder.setSingleChoiceItems(animals, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // user checked an item
+
+            }
+        });
+
+        // add OK and Cancel buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // user clicked OK
+                final String chosen = animals[which];
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+
+// create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
