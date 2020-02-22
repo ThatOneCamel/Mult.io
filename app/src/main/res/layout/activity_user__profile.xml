@@ -59,17 +59,17 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/txtTime"
+        android:id="@+id/txtProblems"
         android:layout_width="112dp"
         android:layout_height="22dp"
-        android:text="32s"
+        android:text="32"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/txtBestTime"
-        app:layout_constraintStart_toStartOf="@+id/txtBestTime"
-        app:layout_constraintTop_toBottomOf="@+id/txtBestTime" />
+        app:layout_constraintEnd_toEndOf="@+id/txtCompleteScore"
+        app:layout_constraintStart_toStartOf="@+id/txtCompleteScore"
+        app:layout_constraintTop_toBottomOf="@+id/txtCompleteScore" />
 
     <TextView
         android:id="@+id/txtWins"
@@ -101,15 +101,15 @@
     <TextView
         android:id="@+id/txtBestScore"
         android:layout_width="140dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="70dp"
-        android:text="Best Score: "
+        android:text="Best\n Score: "
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/txtBestTime"
+        app:layout_constraintEnd_toStartOf="@+id/txtCompleteScore"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtGamesWon" />
@@ -230,20 +230,20 @@
         tools:visibility="visible" />
 
     <TextView
-        android:id="@+id/txtBestTime"
+        android:id="@+id/txtCompleteScore"
         android:layout_width="140dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Best Time: "
+        android:text="Problems\n Completed:"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/txtBestScore"
-        app:layout_constraintTop_toBottomOf="@+id/txtGamesWon" />
+        app:layout_constraintTop_toTopOf="@+id/txtBestScore" />
 
     <ImageView
         android:id="@+id/imgToken"

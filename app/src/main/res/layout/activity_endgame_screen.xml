@@ -13,20 +13,20 @@
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_marginStart="64dp"
-        android:layout_marginBottom="96dp"
+        android:layout_marginBottom="24dp"
         android:onClick="Menu"
         android:text="Menu"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnPlayAgain"
         android:layout_width="100dp"
         android:layout_height="60dp"
-        android:layout_marginStart="96dp"
         android:onClick="Replay"
         android:text="Replay"
         app:layout_constraintBottom_toBottomOf="@+id/btnRetMainMenu"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnRetMainMenu"
         app:layout_constraintTop_toTopOf="@+id/btnRetMainMenu"
         app:layout_constraintVertical_bias="1.0" />
@@ -87,6 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:contentDescription="@string/currency"
         app:layout_constraintBottom_toBottomOf="@+id/currencyNum"
         app:layout_constraintStart_toEndOf="@+id/currencyNum"
         app:layout_constraintTop_toTopOf="@+id/currencyNum"
@@ -110,9 +111,22 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
+        android:contentDescription="@string/currency"
         app:layout_constraintBottom_toBottomOf="@+id/walletTotal"
         app:layout_constraintStart_toEndOf="@+id/walletTotal"
         app:layout_constraintTop_toTopOf="@+id/walletTotal"
         app:srcCompat="@drawable/coin_e" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="393dp"
+        android:layout_height="83dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <!-- ads:adUnitId="ca-app-pub-8821544005650285/5703010718" MY AD ID-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

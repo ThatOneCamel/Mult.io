@@ -12,15 +12,15 @@ public class GameHandlerTimed extends GameHandler {
 
     public GameHandlerTimed() {
         length = 10;
-        problems = new ArrayList<Problem>(length);
+        problems = new ArrayList<>(length);
         generateProblems(length);
         ticker = null;
         initTimer(4000,1000);
     }
 
-    public GameHandlerTimed(int cap, long time) {
+    GameHandlerTimed(int cap, long time) {
         length = cap;
-        problems = new ArrayList<Problem>(length);
+        problems = new ArrayList<>(length);
         generateProblems(length);
         ticker = null;
         initTimer(time,1000);
@@ -28,7 +28,7 @@ public class GameHandlerTimed extends GameHandler {
 
     public GameHandlerTimed(int cap, Diff d) {
         length = cap;
-        problems = new ArrayList<Problem>(length);
+        problems = new ArrayList<>(length);
         generateProblems(d,length);
         ticker = null;
         initTimer(4000,1000);
@@ -49,7 +49,7 @@ public class GameHandlerTimed extends GameHandler {
 
             @Override
             public void onFinish() {
-                ticker.finishTimer();;
+                ticker.finishTimer();
             }
         };
     }

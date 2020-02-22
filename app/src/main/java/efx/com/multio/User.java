@@ -16,10 +16,10 @@ public class User implements Serializable {
     static User player = new User();
 
     /* FUNCTIONS */
-        public String getUsername(){ return m_username; }
+        String getUsername(){ return m_username; }
         //public String getUUID() { return m_UUID; }
-        public String getTitle(){ return m_title; }
-        public PlayerWallet getPlayerWallet() { return m_wallet; }
+        String getTitle(){ return m_title; }
+        PlayerWallet getPlayerWallet() { return m_wallet; }
         public void setUsername(String entry) { m_username = entry; }
         //public void setUUID(String entry) { m_UUID = entry; }
         public void setTitle(String entry) { m_title = entry; }
@@ -33,12 +33,13 @@ public class User implements Serializable {
     private int B_Score;
     private int B_Time;
     private int G_Won;
+    private long total_problems;
     private String TitleArray;
     private String BadgeArray;
     private ArrayList<String> friends;
 
 
-    User(){
+    private User(){
         /*
         m_username = "";
         m_wallet = new PlayerWallet();
@@ -52,10 +53,11 @@ public class User implements Serializable {
         */
         m_wallet = new PlayerWallet();
         setB_Score(0);
+        total_problems = 0;
 
     }
 
-    public int getG_Won() {
+    int getG_Won() {
         return G_Won;
     }
 
@@ -63,7 +65,7 @@ public class User implements Serializable {
         G_Won = g_Won;
     }
 
-    public void addGameWon() { G_Won += 1; }
+    void addGameWon() { G_Won += 1; }
 
     public String getTitleArray() {
         return TitleArray;
@@ -115,21 +117,30 @@ public class User implements Serializable {
         this.m_wallet = m_wallet;
     }
 
-    public int getB_Score() {
+    int getB_Score() {
         return B_Score;
     }
 
-    public void setB_Score(int b_Score) {
+    void setB_Score(int b_Score) {
         B_Score = b_Score;
     }
 
-    public int getB_Time() {
+    int getB_Time() {
         return B_Time;
     }
 
-    public void setB_Time(int b_Time) {
+    void setB_Time(int b_Time) {
         B_Time = b_Time;
     }
+
+    long getProblemsDone() {
+        return total_problems;
+    }
+
+    public void setProblemsDone(int num) { total_problems = num; }
+
+    void addProblemsDone(int num) { total_problems += num; }
+
 
 
     public class PlayerWallet implements Serializable {

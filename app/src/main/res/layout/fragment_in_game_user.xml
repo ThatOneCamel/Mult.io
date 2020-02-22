@@ -9,10 +9,10 @@
 
 
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/userCurrText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cameron"
+        android:text="@string/currency"
         android:textColor="@color/colorBG"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +26,9 @@
         android:layout_marginTop="2dp"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
+        android:contentDescription="@string/currency"
         app:layout_constraintStart_toEndOf="@+id/userCurr"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/userCurrText"
         app:srcCompat="@drawable/coin_e" />
 
     <TextView
@@ -41,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/currImg"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/userName"
+        app:layout_constraintStart_toStartOf="@+id/userCurrText"
         app:layout_constraintTop_toTopOf="@+id/currImg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

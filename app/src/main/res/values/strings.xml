@@ -21,13 +21,15 @@
     <string name="campaign">"Campaign"</string>
     <string name="custom">"Custom"</string>
 
+    <string name="enter_problems">"Enter the number of problems"</string>
+    <string name="currency">"Currency:"</string>
+
+    <string name="enter">"Enter"</string>
     <string name="logout">Logout</string>
     <string name="view_profile">"View Profile"</string>
 
     <!-- TODO: DEBUG STRINGS -->
     <string name="endgame">"See Endgame"</string>
-
-
 
 
 </resources>

@@ -21,19 +21,19 @@ public class GameHandler {
         void  updateTick();
         void  finishTimer();
     }
-    public class Problem {
-        public int numberA;
-        public int numberB;
-        public int answer;
+    class Problem {
+        int numberA;
+        int numberB;
+        int answer;
 
 
-        public Problem(){
+        private Problem(){
             Random rand = new Random();
             numberA = rand.nextInt(12)+1;
             numberB = rand.nextInt(12)+1;
             answer = numberA * numberB;
         }
-        public Problem(Diff d){
+        private Problem(Diff d){
             Random rand = new Random();
             switch(d){
                 case EASY:
@@ -64,40 +64,38 @@ public class GameHandler {
     }
 
 
-
-
-    public GameHandler() {
+    GameHandler() {
         length = 10;
-        problems = new ArrayList<Problem>(length);
+        problems = new ArrayList<>(length);
         generateProblems(length);
         initTimer(4000,1000);
     }
 
-    public GameHandler(int cap) {
+    GameHandler(int cap) {
         length = cap;
-        problems = new ArrayList<Problem>(length);
+        problems = new ArrayList<>(length);
         generateProblems(length);
         initTimer(4000,1000);
     }
 
-    public GameHandler(int cap, Diff d) {
+    GameHandler(int cap, Diff d) {
         length = cap;
-        problems = new ArrayList<Problem>(length);
+        problems = new ArrayList<>(length);
         generateProblems(d,length);
         initTimer(4000,1000);
     }
 
-    public int index = 0;
-    protected int length;
-    protected ArrayList<Problem>   problems;
+    int index = 0;
+    int length;
+    ArrayList<Problem> problems;
     private int score = 0;
-    protected CountDownTimer timer;
-    protected long timeLeft = 4000;
-    protected OnTickUpdate ticker;
-    protected int totalCorrect = 0;
+    CountDownTimer timer;
+    long timeLeft = 4000;
+    OnTickUpdate ticker;
+    int totalCorrect = 0;
 
 
-    public void setOnTickUpdate(OnTickUpdate ticker){
+    void setOnTickUpdate(OnTickUpdate ticker){
         this.ticker = ticker;
     }
 
@@ -117,26 +115,26 @@ public class GameHandler {
         };
     }
 
-    public void timerStart() {
+    private void timerStart() {
         timeLeft = 4000;
         timer.start();
     }
-    public double timerStop() {
+    private double timerStop() {
         timer.cancel();
         return timeLeft / 1000.0;
     }
 
-    public int getTimeSeconds()
+    int getTimeSeconds()
     {
         return (int) timeLeft/1000;
     }
 
-    protected void generateProblems(int cap){
+    void generateProblems(int cap){
         for(int i = 0; i < cap; i++){
             problems.add(new Problem());
         }
     }
-    protected void generateProblems(Diff d, int cap){
+    void generateProblems(Diff d, int cap){
         int E=0, M=0, H=0, Ex=0;
 
 
@@ -182,14 +180,14 @@ public class GameHandler {
                 break;
             case EXTREME:
                 H = (int) Math.floor(cap * .4);
-                Ex = (int) Math.floor(cap * .5);
-                M = cap - Ex - H;
+                Ex = (int) Math.floor(cap * .6);
+                //M = cap - Ex - H;
                 for(int i = 0; i < Ex; i++){
                     problems.add(new Problem(Diff.EXTREME));
                 }
-                for(int i = 0; i < M; i++){
+                /*for(int i = 0; i < M; i++){
                     problems.add(new Problem(Diff.MEDIUM));
-                }
+                }*/
                 for(int i = 0; i < H; i++){
                     problems.add(new Problem(Diff.HARD));
                 }
@@ -202,7 +200,7 @@ public class GameHandler {
         Collections.shuffle(problems);
     }
 
-    public void start(){
+    void start(){
         timerStart();
     }
 
@@ -213,7 +211,7 @@ public class GameHandler {
         timerStart();
     }
 
-    public Problem getProblem(){
+    Problem getProblem(){
         return problems.get(index);
     }
 
@@ -251,13 +249,13 @@ public class GameHandler {
             return 10.0;
         else return 1.0;
     }
-    public String getScore() {
+    String getScore() {
         return Integer.toString(score);
     }
 
-    public int getIntScore() {return score; }
+    int getIntScore() {return score; }
 
-    public int getTotalCorrect(){
+    int getTotalCorrect(){
         return totalCorrect;
     }
 }

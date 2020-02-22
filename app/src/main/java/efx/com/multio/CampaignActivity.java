@@ -1,14 +1,18 @@
 package efx.com.multio;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import efx.com.multio.MainMenuActivity.Gamemode;
 
@@ -22,8 +26,10 @@ public class CampaignActivity extends AppCompatActivity {
     CountDownTimer timer;
     TextView score;
     TextView scoreWord;
-   Gamemode gamemode;
+    Gamemode gamemode;
+
     int difficulty;
+    int numOfProblems;
 
     private long timeLeft = 3500;
 
@@ -37,9 +43,12 @@ public class CampaignActivity extends AppCompatActivity {
         try {
             gamemode = (Gamemode) getIntent().getSerializableExtra("mode");
             difficulty = getIntent().getIntExtra("setting", 1);
+            numOfProblems = getIntent().getIntExtra("problems", 10);
+
 
         } catch (Exception e){
             Log.e("Intent Extras ERROR", e.getLocalizedMessage());
+            numOfProblems = 10;
         }
 
         //Assigning references to all Fragments
@@ -122,12 +131,12 @@ public class CampaignActivity extends AppCompatActivity {
                 });
                 break;
 
-            case EXTREME:
+            case EXTREME20:
                 Game = new GameHandler(20);
                 break;
 
             case CUSTOM:
-                Game = new GameHandler(25);
+                Game = new GameHandler(numOfProblems, Diff.values()[difficulty]);
                 break;
 
             default:
@@ -196,14 +205,16 @@ public class CampaignActivity extends AppCompatActivity {
             //Compare input to answer
             if (Game.checkAnswer(input, score)) {
                 //Correct answer found
-                Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                User.player.addProblemsDone(1);
 
                 editor.setText("");
 
                 if (Game.finished()) {
                     //All questions answered
-                    Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "All problems complete!", Toast.LENGTH_SHORT).show();
+                    User.player.addGameWon();
                     endGame();
 
                 } else {
@@ -214,7 +225,10 @@ public class CampaignActivity extends AppCompatActivity {
 
             //User input was incorrect
             } else {
-                Toast.makeText(this, "Ans is" + answer, Toast.LENGTH_SHORT).show();
+                Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(100); // 5000 miliseconds = 5 seconds
+                editor.setText("");
+                //Toast.makeText(this, "Ans is" + answer, Toast.LENGTH_SHORT).show();
             }//End If-Else [Nested]
 
         }//End If-Else
@@ -237,6 +251,8 @@ public class CampaignActivity extends AppCompatActivity {
         endIntent.putExtra("ScoreInt", Game.getIntScore());
         endIntent.putExtra("mode", gamemode);
         endIntent.putExtra("money", calculateEarnings());
+        endIntent.putExtra("problems", numOfProblems);
+        //endIntent.putExtra("completed", numCompleted);
 
         startActivity(endIntent);
         finish();
@@ -293,6 +309,24 @@ public class CampaignActivity extends AppCompatActivity {
     //Disabling the system's back button
     @Override
     public void onBackPressed() {
-
+        AlertDialog alertDialog = new AlertDialog.Builder(CampaignActivity.this).create();
+        alertDialog.setTitle("Are you sure you would like to quit?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent end = new Intent(getApplicationContext(), MainMenuActivity.class);
+                        startActivity(end);
+                        finish();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
+
 }
