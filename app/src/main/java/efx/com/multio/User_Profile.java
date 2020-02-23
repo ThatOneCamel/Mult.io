@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class User_Profile extends AppCompatActivity {
 
-    TextView m_username;
+    //TextView m_username;
     TextView m_title;
     TextView m_complete;
     TextView m_problems;
@@ -21,7 +21,7 @@ public class User_Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__profile);
 
-        m_username = findViewById(R.id.txtUsername);
+        //m_username = findViewById(R.id.txtUsername);
         m_title = findViewById(R.id.txtTitle);
         m_complete = findViewById(R.id.txtWins);
         m_problems = findViewById(R.id.txtProblems);
@@ -34,7 +34,7 @@ public class User_Profile extends AppCompatActivity {
 
     private void loadUser()
     {
-        m_username.setText(User.player.getUsername());
+        //m_username.setText(User.player.getUsername());
         m_title.setText(User.player.getTitle());
         m_score.setText(""+User.player.getB_Score());
         m_problems.setText(""+User.player.getProblemsDone()+ " problems");

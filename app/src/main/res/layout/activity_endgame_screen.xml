@@ -84,14 +84,14 @@
 
     <ImageView
         android:id="@+id/currImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/currency"
         app:layout_constraintBottom_toBottomOf="@+id/currencyNum"
         app:layout_constraintStart_toEndOf="@+id/currencyNum"
         app:layout_constraintTop_toTopOf="@+id/currencyNum"
-        app:srcCompat="@drawable/baseline_polymer_black_24" />
+        app:srcCompat="@drawable/currency_icon_new" />
 
     <TextView
         android:id="@+id/walletTotal"
@@ -115,7 +115,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/walletTotal"
         app:layout_constraintStart_toEndOf="@+id/walletTotal"
         app:layout_constraintTop_toTopOf="@+id/walletTotal"
-        app:srcCompat="@drawable/coin_e" />
+        app:srcCompat="@drawable/currency_icon_new" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

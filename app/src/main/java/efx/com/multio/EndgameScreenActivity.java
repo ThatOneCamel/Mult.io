@@ -76,7 +76,7 @@ public class EndgameScreenActivity extends AppCompatActivity {
 
 
         //Hardcoded atm; will be sent as an intent extra in future, with the amount being based on user's score
-        amountEarned.setText(Integer.toString(money));
+        amountEarned.setText("+" + money);
         walletDisplay.setText(Integer.toString(User.player.getPlayerWallet().getWallet()));
 
 

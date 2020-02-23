@@ -25,11 +25,11 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="2dp"
         android:adjustViewBounds="false"
-        android:cropToPadding="false"
         android:contentDescription="@string/currency"
+        android:cropToPadding="false"
         app:layout_constraintStart_toEndOf="@+id/userCurr"
         app:layout_constraintTop_toBottomOf="@+id/userCurrText"
-        app:srcCompat="@drawable/coin_e" />
+        app:srcCompat="@drawable/currency_icon_new" />
 
     <TextView
         android:id="@+id/userCurr"
