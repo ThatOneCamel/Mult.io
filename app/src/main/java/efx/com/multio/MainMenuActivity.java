@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,14 +20,14 @@ public class MainMenuActivity extends AppCompatActivity {
 
     boolean primaryActive;
     private ConstraintLayout primaryView;
-    private LinearLayout gameModeView;
-    private Button customView;
+    private ConstraintLayout gameModeView;
     private TextView nameUser;
 
     public enum Gamemode {
         CAMPAIGN,
         TIMED,
         EXTREME20,
+        ELEVENS,
         CUSTOM
     }
 
@@ -34,11 +35,12 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        AdManager adManager = new AdManager(this);
+        adManager.createAd();
         nameUser = findViewById(R.id.userCurrText);
 
         primaryView = findViewById(R.id.primaryView);
-        gameModeView = findViewById(R.id.singleplayerView);
-        customView = findViewById(R.id.btnCustomMode);
+        gameModeView = findViewById(R.id.gamemodeView);
 
         //Game Start
         findViewById(R.id.btnOpenModes).setOnClickListener(new View.OnClickListener() {
@@ -46,7 +48,6 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 primaryView.setVisibility(View.GONE);
                 gameModeView.setVisibility(View.VISIBLE);
-                customView.setVisibility(View.VISIBLE);
                 primaryActive = false;
 
             }
@@ -55,21 +56,28 @@ public class MainMenuActivity extends AppCompatActivity {
         findViewById(R.id.btnCampaignMode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeActivity(Gamemode.CAMPAIGN, 1);
+                changeActivity(Gamemode.CAMPAIGN, Diff.MEDIUM, 10);
             }
         });
 
         findViewById(R.id.btnTimeTrials).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeActivity(Gamemode.TIMED, 1);
+                changeActivity(Gamemode.TIMED, Diff.MEDIUM, 1000);
             }
         });
 
         findViewById(R.id.btnExtremeMode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeActivity(Gamemode.EXTREME20, 3);
+                changeActivity(Gamemode.EXTREME20, Diff.EXTREME, 20);
+            }
+        });
+
+        findViewById(R.id.btnElevens).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeActivity(Gamemode.ELEVENS, Diff.ELEVENS, 11);
             }
         });
 
@@ -82,7 +90,7 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        customView.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnCustomMode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startDialog();
@@ -97,24 +105,24 @@ public class MainMenuActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (!primaryActive) {
             gameModeView.setVisibility(View.GONE);
-            customView.setVisibility(View.GONE);
             primaryView.setVisibility(View.VISIBLE);
             primaryActive = true;
         }
     }
 
-    private void changeActivity(Gamemode gamemode, int difficulty) {
+    /*private void changeActivity(Gamemode gamemode, Diff difficulty) {
         Intent gameplay = new Intent(getApplicationContext(), CampaignActivity.class);
         gameplay.putExtra("mode", gamemode);
-        gameplay.putExtra("setting", difficulty);
+        gameplay.putExtra("difficulty", difficulty);
         startActivity(gameplay);
         finish();
-    }
+    }*/
 
-    private void changeActivity(Gamemode gamemode, int difficulty, int numOfProblems) {
+    //Overloaded
+    private void changeActivity(Gamemode gamemode, Diff difficulty, int numOfProblems) {
         Intent gameplay = new Intent(getApplicationContext(), CampaignActivity.class);
         gameplay.putExtra("mode", gamemode);
-        gameplay.putExtra("setting", difficulty);
+        gameplay.putExtra("difficulty", difficulty);
         gameplay.putExtra("problems", numOfProblems);
         startActivity(gameplay);
         finish();
@@ -122,23 +130,62 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void startDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
-        builder.setTitle("Choose your difficulty.");
+        builder.setTitle("Choose your mode.");
 
         // add a radio button list
-        int length = Gamemode.values().length;
-        String[] modes = new String[length];
-        for (int i = 0; i < length; i++) {
+        //int length = Gamemode.values().length;
+        String[] modes = new String[2];
+        modes[0] = "Normal";
+        modes[1] = "Timed";
+        /*for (int i = 0; i < length; i++) {
             modes[i] = Gamemode.values()[i].name();
-        }
+        }*/
 
         builder.setSingleChoiceItems(modes, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int choice) {
                 // user checked an item
-                if(choice == 1){
-                    changeActivity(Gamemode.values()[choice], 2);//Add difficulty choice dialog
+                /*if(choice == 2){
+                    changeActivity(Gamemode.values()[choice], Diff.EXTREME, 20);//Add difficulty choice dialog
+                } else {*/
+                startDiffDialog(Gamemode.values()[choice]);
+
+                    //showInputNumDialog(Gamemode.values()[choice]);
+                //}
+                dialog.dismiss();
+                //startNumberPicker(Gamemode.values()[choice]);
+
+
+            }
+        });
+
+        // Cancel buttons
+        builder.setNegativeButton("Cancel", null);
+
+// create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void startDiffDialog(final Gamemode gamemode){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
+        builder.setTitle("Choose your difficulty.");
+
+        // add a radio button list
+        int length = Diff.values().length;
+        String[] modes = new String[length];
+        for (int i = 0; i < length; i++) {
+            modes[i] = Diff.values()[i].name();
+        }
+
+        builder.setSingleChoiceItems(modes, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int choice) {
+                // If Timed, start game
+                if(gamemode == Gamemode.TIMED){
+                    changeActivity(gamemode, Diff.values()[choice], 1000);//Add difficulty choice dialog
                 } else {
-                    showInputNumDialog(Gamemode.values()[choice]);
+                    showInputNumDialog(Gamemode.values()[choice], Diff.values()[choice]);
                 }
                 dialog.dismiss();
                 //startNumberPicker(Gamemode.values()[choice]);
@@ -155,22 +202,11 @@ public class MainMenuActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void startNumberPicker(Gamemode gm) {
-        /*typeFragment.getView().setVisibility(View.VISIBLE);
-        EditText input = typeFragment.getView().findViewById(R.id.inputNumberView);
-        input.setFocusableInTouchMode(true);
-        input.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(input, InputMethodManager.SHOW_FORCED);*/
+    public void showInputNumDialog(final Gamemode gm, final Diff diff) {
 
-    }
-
-    public void showInputNumDialog(final Gamemode gm) {
-
-        final AlertDialog dialog = new AlertDialog.Builder(this).setCancelable(false).create();
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();
         View customView = getLayoutInflater().inflate(R.layout.display_type_number, null);
         dialog.setView(customView);
-
         final EditText inputNum = customView.findViewById(R.id.inputNumberView);
         Button confirmation = customView.findViewById(R.id.confirmBtn);
 
@@ -179,9 +215,13 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (inputNum.getText().toString().isEmpty())
                     Toast.makeText(getApplication(), "Number cannot be empty", Toast.LENGTH_SHORT).show();
+                else if (Integer.parseInt(inputNum.getText().toString()) < 1){
+                    Toast.makeText(getApplication(), "Number cannot be negative or 0", Toast.LENGTH_SHORT).show();
+                }
                 else
                     try{
-                        changeActivity(gm, 2 ,Integer.parseInt(inputNum.getText().toString()));
+                        dialog.dismiss();
+                        changeActivity(gm, diff ,Integer.parseInt(inputNum.getText().toString()));
                     }catch (Exception e){
                         Toast.makeText(getApplicationContext(),"Invalid Number [ Too Large / Negative ]",Toast.LENGTH_SHORT).show();
                     }

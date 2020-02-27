@@ -1,8 +1,12 @@
 package efx.com.multio;
 
+import android.content.Context;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +16,8 @@ enum Diff{
     EASY,
     MEDIUM,
     HARD,
-    EXTREME
+    EXTREME,
+    ELEVENS
 }
 
 public class GameHandler {
@@ -52,10 +57,14 @@ public class GameHandler {
                     answer = numberA * numberB;
                     break;
                 case EXTREME:
-                    numberA = rand.nextInt(10) + 7;
-                    numberB = rand.nextInt(10) + 8;
+                    numberA = rand.nextInt(9) + 6;
+                    numberB = rand.nextInt(9) + 6;
                     answer = numberA * numberB;
                     break;
+                case ELEVENS:
+                    numberA = rand.nextInt(12) + 1;
+                    numberB = 11;
+                    answer = numberA * numberB;
 
             }
 
@@ -143,10 +152,10 @@ public class GameHandler {
                 E = (int) Math.floor(cap * .6);
                 M = cap -E;
                 for(int i = 0; i < E; i++){
-                    problems.add(new Problem(Diff.EASY));
+                    makeProblem(d, i);
                 }
                 for(int i = 0; i < M; i++){
-                    problems.add(new Problem(Diff.MEDIUM));
+                    makeProblem(d, i);
                 }
                 break;
             case MEDIUM:
@@ -155,13 +164,13 @@ public class GameHandler {
                 H = cap - E - M;
 
                 for(int i = 0; i < E; i++){
-                    problems.add(new Problem(Diff.EASY));
+                    makeProblem(Diff.EASY, i);
                 }
                 for(int i = 0; i < M; i++){
-                    problems.add(new Problem(Diff.MEDIUM));
+                    makeProblem(Diff.MEDIUM, i);
                 }
                 for(int i = 0; i < H; i++){
-                    problems.add(new Problem(Diff.HARD));
+                    makeProblem(Diff.HARD, i);
                 }
                 break;
             case HARD:
@@ -169,13 +178,13 @@ public class GameHandler {
                 H = (int) Math.floor(cap * .5);
                 E = cap - M - H;
                 for(int i = 0; i < E; i++){
-                    problems.add(new Problem(Diff.EASY));
+                    makeProblem(Diff.EASY, i);
                 }
                 for(int i = 0; i < M; i++){
-                    problems.add(new Problem(Diff.MEDIUM));
+                    makeProblem(Diff.MEDIUM, i);
                 }
                 for(int i = 0; i < H; i++){
-                    problems.add(new Problem(Diff.HARD));
+                    makeProblem(Diff.HARD, i);
                 }
                 break;
             case EXTREME:
@@ -183,22 +192,73 @@ public class GameHandler {
                 Ex = (int) Math.floor(cap * .6);
                 //M = cap - Ex - H;
                 for(int i = 0; i < Ex; i++){
-                    problems.add(new Problem(Diff.EXTREME));
+                    makeProblem(Diff.EXTREME, i);
                 }
                 /*for(int i = 0; i < M; i++){
                     problems.add(new Problem(Diff.MEDIUM));
                 }*/
                 for(int i = 0; i < H; i++){
-                    problems.add(new Problem(Diff.HARD));
+                    makeProblem(Diff.HARD, i);
                 }
                 break;
+            case ELEVENS:
+                for(int i = 0; i < cap; i++){
+                    makeProblem(Diff.ELEVENS, i);
+                }
         }
         Log.i("Easy",""+E);
         Log.i("Medium",""+M);
         Log.i("Hard",""+H);
         Log.i("Extreme",""+Ex);
-        Collections.shuffle(problems);
+        if(d != Diff.ELEVENS)
+            Collections.shuffle(problems);
     }
+
+    void makeProblem(Diff d, int index){
+        problems.add(new Problem(d));
+
+        if(index > 0){
+            int a = problems.get(index).numberA;
+            int b = problems.get(index).numberB;
+            if(b > a){
+                int c = b;
+                b = a;
+                a = c;
+            }
+
+            int a2 = problems.get(index - 1).numberA;
+            int b2 = problems.get(index - 1).numberB;
+            if(b2 > a2){
+                int c2 = b2;
+                b2 = a2;
+                a2 = c2;
+            }
+
+            while(a == a2 && b == b2){
+                Log.i("FOUND", "Found dupe.");
+                problems.set(index, new Problem(d));
+                a = problems.get(index).numberA;
+                b = problems.get(index).numberB;
+                if(b > a){
+                    int c = b;
+                    b = a;
+                    a = c;
+                }
+
+                //problems.add(new Problem(d));
+            }
+
+        }
+
+
+        /*while(index > 0 && problems.get(index - 1) == problems.get(index))
+            Log.i("FOUND", "Found dupe.");
+            problems.set(index, new Problem(d));
+            //problems.add(new Problem(d));*/
+
+    }
+
+
 
     void start(){
         timerStart();
@@ -258,4 +318,5 @@ public class GameHandler {
     int getTotalCorrect(){
         return totalCorrect;
     }
+
 }

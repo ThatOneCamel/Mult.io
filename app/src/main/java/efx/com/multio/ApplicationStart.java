@@ -21,11 +21,12 @@ public class ApplicationStart extends Application {
     public void onCreate() {
         super.onCreate();
         User.player.loadLocalData(getApplicationContext());
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+        /*MobileAds.initialize(this, new OnInitializationCompleteListener() {
+
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
-        });
+        });*/
 
     }
 

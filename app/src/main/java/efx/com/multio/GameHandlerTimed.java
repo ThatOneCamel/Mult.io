@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 public class GameHandlerTimed extends GameHandler {
 
-
-
-
     public GameHandlerTimed() {
         length = 10;
         problems = new ArrayList<>(length);
@@ -18,10 +15,13 @@ public class GameHandlerTimed extends GameHandler {
         initTimer(4000,1000);
     }
 
-    GameHandlerTimed(int cap, long time) {
+    GameHandlerTimed(int cap, long time, Diff d) {
         length = cap;
         problems = new ArrayList<>(length);
-        generateProblems(length);
+
+        for(int i = 0; i < cap; i++){
+            makeProblem(d, i);
+        }
         ticker = null;
         initTimer(time,1000);
     }

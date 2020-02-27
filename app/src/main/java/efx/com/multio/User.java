@@ -33,6 +33,7 @@ public class User implements Serializable {
     private int B_Score;
     private int B_Time;
     private int G_Won;
+    private int most_problems_timed;
     private long total_problems;
     private String TitleArray;
     private String BadgeArray;

@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <Button
             android:id="@+id/btnOpenModes"
@@ -80,68 +81,104 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/singleplayerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gamemodeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <ImageButton
             android:id="@+id/btnExtremeMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorDarkBG"
-            android:text="Extreme 20"
-            android:textColor="@color/colorBG" />
+            android:background="@drawable/btn_extreme"
+            android:backgroundTint="@null"
+            android:textColor="@color/colorBG"
+            app:layout_constraintEnd_toStartOf="@+id/btnElevens"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCampaignMode" />
 
-        <Button
-            android:id="@+id/btnTimeTrials"
-            android:layout_width="120dp"
+        <ImageButton
+            android:id="@+id/btnElevens"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorDarkBG"
-            android:text="@string/time_trial"
-            android:textAlignment="center"
-            android:textColor="@color/colorBG" />
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_elevens"
+            android:textColor="@color/colorBG"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnExtremeMode"
+            app:layout_constraintTop_toBottomOf="@+id/btnTimeTrials" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnCampaignMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/btn_normal"
+            android:fontFamily="@null"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnTimeTrials"
+            app:layout_constraintEnd_toStartOf="@+id/btnTimeTrials"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnTimeTrials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/btn_timetrial"
+            android:backgroundTint="@null"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnCampaignMode"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <ImageButton
+            android:id="@+id/btnCustomMode"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorDarkBG"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_custom"
+            android:backgroundTint="@null"
             android:fontFamily="@font/roboto_bold"
-            android:text="@string/campaign"
             android:textAlignment="center"
             android:textColor="@color/colorBG"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="210dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Choose a mode"
+            android:textColor="@color/colorDarkBG"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCustomMode" />
 
-    <Button
-        android:id="@+id/btnCustomMode"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/colorDarkBG"
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/custom"
-        android:textAlignment="center"
-        android:textColor="@color/colorBG"
-        android:textSize="14sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

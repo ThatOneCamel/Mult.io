@@ -22,6 +22,7 @@
     <string name="custom">"Custom"</string>
 
     <string name="enter_problems">"Enter the number of problems"</string>
+    <string name="enter_problems_hint">"# of problems"</string>
     <string name="currency">"Currency:"</string>
 
     <string name="enter">"Enter"</string>

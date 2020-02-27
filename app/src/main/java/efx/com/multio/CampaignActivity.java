@@ -28,7 +28,7 @@ public class CampaignActivity extends AppCompatActivity {
     TextView scoreWord;
     Gamemode gamemode;
 
-    int difficulty;
+    Diff difficulty;
     int numOfProblems;
 
     private long timeLeft = 3500;
@@ -42,7 +42,7 @@ public class CampaignActivity extends AppCompatActivity {
 
         try {
             gamemode = (Gamemode) getIntent().getSerializableExtra("mode");
-            difficulty = getIntent().getIntExtra("setting", 1);
+            difficulty = (Diff) getIntent().getSerializableExtra("difficulty");
             numOfProblems = getIntent().getIntExtra("problems", 10);
 
 
@@ -97,7 +97,7 @@ public class CampaignActivity extends AppCompatActivity {
 
         });
         setGamemode(gamemode);
-        setGameDifficulty(difficulty);
+        //setGameDifficulty(difficulty);
         mathFragment.load(Game.getProblem().numberA, Game.getProblem().numberB);
 
 
@@ -109,56 +109,43 @@ public class CampaignActivity extends AppCompatActivity {
 
     private void setGamemode(Gamemode gamemode){
 
-        switch (gamemode){
-            case CAMPAIGN:
-                Game = new GameHandler(10);
-                break;
+        if(gamemode == Gamemode.TIMED){
+            Game = new GameHandlerTimed(1000, 60000, difficulty);
+            scoreWord.setText("Time Left");
+            score.setText(""+Game.getTimeSeconds());
+            Game.setOnTickUpdate(new GameHandler.OnTickUpdate() {
+                @Override
+                public void updateTick() {
+                    score.setText(""+Game.getTimeSeconds());
+                }
 
-            case TIMED:
-                Game = new GameHandlerTimed(1000, 60000);
-                scoreWord.setText("Time Left");
-                score.setText(""+Game.getTimeSeconds());
-                Game.setOnTickUpdate(new GameHandler.OnTickUpdate() {
-                    @Override
-                    public void updateTick() {
-                        score.setText(""+Game.getTimeSeconds());
-                    }
-
-                    @Override
-                    public void finishTimer() {
-                        endGameTimed();
-                    }
-                });
-                break;
-
-            case EXTREME20:
-                Game = new GameHandler(20);
-                break;
-
-            case CUSTOM:
-                Game = new GameHandler(numOfProblems, Diff.values()[difficulty]);
-                break;
-
-            default:
-                Game = new GameHandler();
-                break;
+                @Override
+                public void finishTimer() {
+                    endGameTimed();
+                }
+            });
+        } else {
+            Game = new GameHandler(numOfProblems, difficulty);
         }
+
     }
 
-    private void setGameDifficulty(int d){
+    /*private void setGameDifficulty(Diff d){
         switch(d){
-            case 0:
-                Game.generateProblems(Diff.EASY, 10);
+            case EASY:
+                Game.generateProblems(Diff.EASY, numOfProblems);
                 break;
-            case 1:
-                Game.generateProblems(Diff.MEDIUM,10);
+            case MEDIUM:
+                Game.generateProblems(Diff.MEDIUM,numOfProblems);
                 break;
-            case 2:
-                Game.generateProblems(Diff.HARD, 10);
-            case 3:
-                Game.generateProblems(Diff.EXTREME, 20);
+            case HARD:
+                Game.generateProblems(Diff.HARD, numOfProblems);
+            case EXTREME:
+                Game.generateProblems(Diff.EXTREME, numOfProblems);
+            case ELEVENS:
+                Game.generateProblems(Diff.ELEVENS, numOfProblems);
         }
-    }
+    }*/
 
     private void beginCountdown(){
         timer = new CountDownTimer(timeLeft,100) {
@@ -250,6 +237,7 @@ public class CampaignActivity extends AppCompatActivity {
         endIntent.putExtra("Score",Game.getScore());
         endIntent.putExtra("ScoreInt", Game.getIntScore());
         endIntent.putExtra("mode", gamemode);
+        endIntent.putExtra("difficulty", difficulty);
         endIntent.putExtra("money", calculateEarnings());
         endIntent.putExtra("problems", numOfProblems);
         //endIntent.putExtra("completed", numCompleted);
@@ -266,7 +254,10 @@ public class CampaignActivity extends AppCompatActivity {
         endIntent.putExtra("Score",""+ Game.getTotalCorrect());
         endIntent.putExtra("ScoreInt", Game.getIntScore());
         endIntent.putExtra("mode", gamemode);
+        endIntent.putExtra("difficulty", difficulty);
         endIntent.putExtra("money", calculateEarnings());
+        endIntent.putExtra("problems", numOfProblems);
+        User.player.addGameWon();
 
         startActivity(endIntent);
         finish();
